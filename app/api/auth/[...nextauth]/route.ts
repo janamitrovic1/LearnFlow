@@ -34,7 +34,7 @@ export const authOptions: AuthOptions = {
 
             const { firstName, lastName, email, password} = {...credentials, password: hashed};
 
-            return await prisma.teacher.create({
+            const user = await prisma.teacher.create({
               data: {
                 firstName,
                 lastName,
@@ -42,7 +42,7 @@ export const authOptions: AuthOptions = {
                 password
               }
             })
-
+            return {...user, role: 'teacher'};
         } catch (error) {
           console.log(error)
             return Promise.reject("Invalid Credentials!");
@@ -70,7 +70,7 @@ export const authOptions: AuthOptions = {
             const valid = await bcrypt.compare(credentials.password, user?.password);
 
             if(valid)
-              return user
+              return {...user, role: 'teacher'};
 
             return null;
         } catch (error) {
@@ -102,7 +102,7 @@ export const authOptions: AuthOptions = {
 
           const { firstName, lastName, email, password} = {...credentials, password: hashed};
 
-          return await prisma.student.create({
+          const user = await prisma.student.create({
             data: {
               firstName,
               lastName,
@@ -110,7 +110,7 @@ export const authOptions: AuthOptions = {
               password
             }
           })
-
+          return {...user, role: 'student'};
       } catch (error) {
         console.log(error)
           return Promise.reject("Invalid Credentials!");
@@ -138,7 +138,7 @@ export const authOptions: AuthOptions = {
             const valid = await bcrypt.compare(credentials.password, user?.password);
 
             if(valid)
-              return user
+              return {...user, role: 'student'};
 
             return null;
         } catch (error) {
@@ -146,6 +146,23 @@ export const authOptions: AuthOptions = {
         }
     }})
   ],
+  callbacks: {
+    async signIn({ user }: any) {
+      return true;
+    },
+  
+    async jwt({ token, account, user }: any) {
+      // Add role during sign-in (when `account` exists)
+      if (account)
+        token.role = user?.role; // Use `user.role` here
+      return token;
+    },
+  
+    async session({ session, token }: any) {
+      session.user.role = token.role;
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
 }
 
