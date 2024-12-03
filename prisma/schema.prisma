@@ -22,6 +22,7 @@ model Teacher {
   image     String @default("/empty_profile.png")
   quizzes   Quiz[]  @relation("TeacherQuizzes")
   questions Question[]  @relation("TeacherQuestions")
+  classes   Class[] @relation("TeacherClasses")
 }
 
 model Student {
@@ -32,14 +33,17 @@ model Student {
   password  String
   image     String @default("/empty_profile.png")
   quizzes   StudentQuiz[] @relation("StudentQuizzes")
+  studentClass StudentClass[] @relation("StudentClass")
 }
 
 model Quiz {
   id String @id @default(uuid())
   teacherId String
   name String
-  teacher Teacher @relation("TeacherQuizzes", fields: [teacherId], references: [id])
+  isPrivate Boolean
+  teacher   Teacher     @relation("TeacherQuizzes", fields: [teacherId], references: [id])
   students StudentQuiz[] @relation("QuizStudents")
+  questions Question[]   @relation("QuizQuestions")
 }
 
 model StudentQuiz {
@@ -58,11 +62,13 @@ enum QuestionType {
 model Question {
   id          String     @id @default(uuid())
   teacherId   String
+  quizId      String
   text        String
   questionType QuestionType
   teacher     Teacher    @relation("TeacherQuestions", fields: [teacherId], references: [id])
   responses   Response[] @relation("QuestionResponses")
   answers     Answer[]   @relation("QuestionAnswers")
+  quiz        Quiz       @relation("QuizQuestions", fields: [quizId], references: [id])     
 }
 
 model Response {
@@ -79,4 +85,20 @@ model Answer {
   question    Question   @relation("QuestionAnswers", fields: [questionId], references: [id])
   response    Response   @relation("ResponseAnswers", fields: [responseId], references: [id])
   @@id([questionId, responseId])
+}
+
+model Class {
+  id String @id @default(uuid())
+  teacherId String
+  name String
+  teacher Teacher @relation("TeacherClasses", fields: [teacherId], references: [id])
+  studentClass StudentClass[] @relation("ClassStudent")
+}
+
+model StudentClass{
+  classId String
+  studentId String
+  class Class @relation("ClassStudent", fields: [classId], references: [id])
+  student Student @relation("StudentClass", fields: [studentId], references: [id])
+  @@id([classId, studentId])
 }
