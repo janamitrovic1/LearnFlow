@@ -2,10 +2,6 @@ import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { prisma } from "@/prisma/db";
-import LoginSchema from "@/utils/zodschemas/LoginSchema";
-import RegisterSchema from "@/utils/zodschemas/RegisterSchema";
-import { text } from "stream/consumers";
-import { object } from "zod";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -162,6 +158,9 @@ export const authOptions: AuthOptions = {
       session.user.role = token.role;
       return session;
     },
+  },
+  pages: {
+    signIn: '/student/signin',
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
