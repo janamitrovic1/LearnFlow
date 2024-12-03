@@ -69,17 +69,17 @@ export default function StudentSignIn() {
     if (Object.keys(newErrors).length > 0) {
       setError(newErrors);
     } else {
-      await signIn("SignUpT", {
+      await signIn("SignInT", {
         redirect: false,
         ...formData
       })
-      router.push("/student")
+      router.push("/teacher")
     }
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: "0 auto" }}>
-      {["firstName", "lastName", "email", "password", "confirmPassword"].map(
+      {["email", "password"].map(
         (field) => (
           <div key={field} style={{ marginBottom: 16 }}>
             <label
@@ -91,7 +91,7 @@ export default function StudentSignIn() {
                 .replace(/^./, (str) => str.toUpperCase())}
             </label>
             <input
-              type={field.includes("password") || field.includes("confirmPassword")? "password" : "text"}
+              type={field.includes("password") ? "password" : "text"}
               id={field}
               name={field}
               value={formData[field as keyof FormData]}
@@ -117,9 +117,9 @@ export default function StudentSignIn() {
           borderRadius: 4,
         }}
       >
-        Sign Up
+        Sign In
       </button>
-      <Link href="/student/signin">SignIn!</Link>
+      <Link href="/teacher/signup">SignUp!</Link>
     </form>
   );
 }
