@@ -69,11 +69,11 @@
 	background-position: center;
 	}
 
-	.card:nth-child(1) {
+	.card1 {
 	background-image: url('/public/homesection1.jpg'); /* Promeni putanju slike */
 	}
 
-	.card:nth-child(2) {
+	.card2 {
 	background-image: url('/public/homesection2.jpg'); /* Promeni putanju slike */
 	}
 
@@ -86,7 +86,7 @@
 	}
 
 	.cta-button {
-		@apply px-6 py-2 font-light rounded-full text-white w-full max-w-max;
+		@apply px-6 py-2 font-light rounded-full text-white w-full max-w-max hover:scale-110 transform transition-transform duration-500;
 	  }
 	
 	.cta-button-outline {
@@ -96,6 +96,20 @@
 	.cta-button-filled {
 		@apply bg-[#B2B3CF];
 	}
+
+	.feature-card {
+		@apply p-6 bg-white border border-gray-200 rounded-lg shadow-lg w-80 max-w-full;
+	  }
+	  
+	  .feature-icon {
+		@apply mb-4 p-4 bg-blue-100 rounded-full inline-block;
+	  }
+	  
+	  /* Button for features */
+	  .feature-button {
+		@apply px-6 py-2 font-light rounded-full text-white bg-blue-500 hover:bg-blue-700 transition-colors duration-300;
+	  }
+
 }
 body {
 	color: var(--foreground);
