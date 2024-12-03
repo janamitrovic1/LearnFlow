@@ -155,12 +155,10 @@ export const authOptions: AuthOptions = {
     },
   
     async session({ session, token }: any) {
+      session.user.id = token.sub;
       session.user.role = token.role;
       return session;
     },
-  },
-  pages: {
-    signIn: '/student/signin',
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
