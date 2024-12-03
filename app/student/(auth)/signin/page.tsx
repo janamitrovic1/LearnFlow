@@ -64,48 +64,54 @@ export default function StudentSignIn() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: "0 auto" }}>
-      {["email", "password"].map(
-        (field) => (
-          <div key={field} style={{ marginBottom: 16 }}>
+    <div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-lg">
+      <h2 className="text-2xl font-semibold text-center mb-4">Sign In</h2>
+      <form onSubmit={handleSubmit}>
+        {["email", "password"].map((field) => (
+          <div key={field} className="mb-4">
             <label
               htmlFor={field}
-              style={{ display: "block", marginBottom: 4 }}
+              className={`block text-sm font-medium ${
+                error[field as keyof FormData] ? "text-red-500" : ""
+              }`}
             >
               {field
                 .replace(/([A-Z])/g, " $1")
                 .replace(/^./, (str) => str.toUpperCase())}
             </label>
             <input
-              type={field.includes("password") ? "password" : "text"}
+              type={field === "password" ? "password" : "text"}
               id={field}
               name={field}
               value={formData[field as keyof FormData]}
               onChange={handleInputChange}
-              style={{ width: "100%", padding: 8, color: 'black' }}
+              className={`w-full px-3 py-2 mt-1 border ${
+                error[field as keyof FormData]
+                  ? "border-red-500"
+                  : "border-gray-300"
+              } bg-gray-50 text-gray-800 rounded-md`}
             />
             {error[field as keyof FormData] && (
-              <p style={{ color: "red", fontSize: 12 }}>
+              <span className="text-red-500 text-sm">
                 {error[field as keyof FormData]}
-              </p>
+              </span>
             )}
           </div>
-        )
-      )}
-      <button
-        type="submit"
-        style={{
-          padding: 10,
-          width: "100%",
-          backgroundColor: "blue",
-          color: "white",
-          border: "none",
-          borderRadius: 4,
-        }}
-      >
-        Sign In
-      </button>
-      <Link href="/student/signup">SignUp!</Link>
-    </form>
+        ))}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+        >
+          Sign In
+        </button>
+        <p className="mt-4 text-center">
+          Don&apos;t have an account?{" "}
+          <Link href="/student/signup" className="text-blue-600 hover:underline">
+            Sign up
+          </Link>
+        </p>
+      </form>
+    </div>
   );
+  
 }
