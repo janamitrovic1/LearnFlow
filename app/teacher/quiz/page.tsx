@@ -99,7 +99,7 @@ export default function CreateQuiz() {
           <fieldset key={"form" + index}>
             <label htmlFor="text">Enter question text:</label>
             <br />
-            <input type="text" name="text" className="text-black" />
+            <input type="text" name="text" />
             <br />
             {(question.type == "RADIO" &&
               question.answers?.map((answer: string, i: number) => (
@@ -107,12 +107,10 @@ export default function CreateQuiz() {
                   <input
                     type="radio"
                     name={index + ""}
-                    className="text-black"
                     onChange={() => handleRadioAnswer(index, i)}
                   />
                   <input
                     type="text"
-                    className="text-black"
                     value={answer}
                     onChange={(e) =>
                       handleAnswerChange(e.target.value, index, i)
@@ -123,10 +121,9 @@ export default function CreateQuiz() {
               (question.type == "CHECK" &&
                 question.answers?.map((answer: string, i: number) => (
                   <div key={i}>
-                    <input type="checkbox" className="text-black" onChange={() => handleCheckAnswer(index, i) } />
+                    <input type="checkbox" onChange={() => handleCheckAnswer(index, i) } />
                     <input
                       type="text"
-                      className="text-black"
                       value={answer}
                       onChange={(e) =>
                         handleAnswerChange(e.target.value, index, i)
@@ -139,7 +136,6 @@ export default function CreateQuiz() {
                   type="text"
                   value={question.answers ? question.answers[0] : ""}
                   onChange={(e) => handleAnswerChange(e.target.value, index, 0)}
-                  className="text-black"
                 />
               ))}
 

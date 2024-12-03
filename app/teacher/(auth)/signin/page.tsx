@@ -6,40 +6,30 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface FormData {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
+}
+
+interface ErrorData extends FormData{
+	request: string;
 }
 
 export default function StudentSignIn() {
   const [formData, setFormData] = useState<FormData>({
-	firstName: "",
-	lastName: "",
 	email: "",
 	password: "",
-	confirmPassword: "",
   });
-  const [error, setError] = useState<Partial<FormData>>({});
+  const [error, setError] = useState<Partial<ErrorData>>({});
   const router = useRouter()
 
   const validateInput = (name: keyof FormData, value: string) => {
 	switch (name) {
-	  case "firstName":
-	  case "lastName":
-		if (value.trim() === "") return "This field is required.";
-		if (value.length < 2) return "Must be at least 2 characters.";
-		break;
 	  case "email":
 		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
 		  return "Invalid email address.";
 		break;
 	  case "password":
 		if (value.length < 6) return "Password must be at least 6 characters.";
-		break;
-	  case "confirmPassword":
-		if (value !== formData.password) return "Passwords do not match.";
 		break;
 	  default:
 		return "";
@@ -69,17 +59,24 @@ export default function StudentSignIn() {
 	if (Object.keys(newErrors).length > 0) {
 	  setError(newErrors);
 	} else {
-	  await signIn("SignInT", {
-		redirect: false,
-		...formData
-	  })
-	  router.push("/teacher")
+	  try{
+		const res = await signIn("SignInT", {
+			redirect: false,
+			...formData
+		  })
+		  if(!res?.ok)
+			setError({ request: "Invalid Credentials Are Provided!" })
+		  router.push("/teacher")
+	  } catch(error: any) {
+		console.log(error)
+	  }
 	}
   };
 return(
 <div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-lg">
   <form onSubmit={handleSubmit} className="max-w-md mx-auto">
 	<h2 className="text-2xl font-semibold text-center mb-4">Sign In</h2>
+	{error?.request}
 	{["email", "password"].map((field) => (
 	  <div key={field} className="mb-4">
 		<label
