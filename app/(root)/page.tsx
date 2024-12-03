@@ -6,30 +6,30 @@ export default function Home() {
 		<div className="px-16">
 			<section className="what-is-skilline py-16 px-6 md:px-20">
 				<div className="text-center mb-12">
-					<h2 className="title">What is <span className="highlight">Skilline?</span></h2>
+					<h2 className="title">What is <span className="highlight">LearnFlow?</span></h2>
 					<p className="subtitle">
-					Skilline is a platform that allows educators to create online classes whereby they can store the course materials online; manage assignments, quizzes, and exams; monitor due dates; grade results and provide students with feedback all in one place.
+					LearnFlow is a platform that allows educators to create online classes whereby they can store the course materials online; manage assignments, quizzes, and exams; monitor due dates; grade results and provide students with feedback all in one place.
 					</p>
 				</div>
 				<div className="cards flex flex-col md:flex-row gap-6 justify-center">
 					<div className="card card-1">
 						<div className="overlay">
 							<h3 className="card-title">FOR INSTRUCTORS</h3>
-							<button className="cta-button cta-button-outline">Start a className today</button>
+							<button className="cta-button cta-button-outline text-sm ">Start a className today</button>
 						</div>
 					</div>
 					<div className="card card-2">
 						<div className="overlay">
 							<h3 className="card-title">FOR STUDENTS</h3>
-							<button className="cta-button cta-button-filled">Enter access code</button>
+							<button className="cta-button cta-button-filled text-sm">Enter access code</button>
 						</div>
 					</div>
 				</div>
 			</section>
 			<div className="text-center my-12">
-				<h2 className="text-4xl text-text font-bold mb-4"><span className="text-[#B2B3CF]">All-In-One</span> Cloud Software.</h2>
-				<p className="text-lg text-gray-500 mb-8">
-					Skilline is one powerful online software suite that combines all the tools needed to run a successful school or office.
+				<h2 className="text-2xl md:text-4xl text-text font-bold mb-4"><span className="text-[#B2B3CF]">All-In-One</span> Cloud Software.</h2>
+				<p className="sm:text-lg text-sm text-gray-500 mb-8">
+					LearnFlow is one powerful online software suite that combines all the tools needed to run a successful school or office.
 				</p>
 
 				{/* Flexbox container za 3 kartice */}
@@ -40,7 +40,7 @@ export default function Home() {
 							<img src="doc.svg" alt="" width={20} />
 						</i>
 					</div>
-					<h3 className="text-xl text-[#2F327D] font-semibold mb-2">Online Billing, Invoicing, & Contracts</h3>
+					<h3 className="sm:text-xl text-sm text-[#2F327D] font-semibold mb-2">Online Billing, Invoicing, & Contracts</h3>
 					<p className="text-sm text-gray-600">
 						Simple and secure control of your organization’s financial and legal transactions. Send customized invoices and contracts.
 					</p>
@@ -51,7 +51,7 @@ export default function Home() {
 							<img src="cal.svg" alt="" width={20} />
 						</i>
 					</div>
-					<h3 className="text-xl text-[#2F327D] font-semibold mb-2">Easy Scheduling & Attendance Tracking</h3>
+					<h3 className="sm:text-xl text-sm text-[#2F327D] font-semibold mb-2">Easy Scheduling & Attendance Tracking</h3>
 					<p className="text-sm text-gray-600">
 						Schedule and reserve classrooms at one campus or multiple campuses. Keep detailed records of student attendance.
 					</p>
@@ -62,19 +62,19 @@ export default function Home() {
 							<img src="group.svg" alt="" width={20} />
 						</i>
 					</div>
-					<h3 className="text-xl text-[#2F327D] font-semibold mb-2">Customer Tracking</h3>
+					<h3 className="sm:text-xl text-sm text-[#2F327D] font-semibold mb-2">Customer Tracking</h3>
 					<p className="text-sm text-gray-600">
-						Automate and track emails to individuals or groups. Skilline’s built-in system helps organize your organization.
+						Automate and track emails to individuals or groups. LearnFlow’s built-in system helps organize your organization.
 					</p>
 					</div>
 				</div>
 
 				<div className="mt-12 text-center ">
-					<h3 className="text-3xl text-text font-medium mb-6">
-					Everything you can do in a physical classroom, <span className="text-[#B2B3CF]">you can do with Skilline</span>
+					<h3 className="text-text text-[1.5rem] md:text-[4xl] font-medium mb-6">
+					Everything you can do in a physical classroom, <span className="text-[#B2B3CF]">you can do with LearnFlow</span>
 					</h3>
-					<p className="text-lg font-normal text-gray-500 mb-6">
-					Skilline’s school management software helps traditional and online schools manage scheduling, attendance, payments, and virtual classrooms all in one secure cloud-based system.
+					<p className="font-normal text-sm md:text-lg  text-gray-500 mb-6">
+						FlearnFlow’s school management software helps traditional and online schools manage scheduling, attendance, payments, and virtual classrooms all in one secure cloud-based system.
 					</p>
 					<button className="feature-button">Learn more</button>
 				</div>

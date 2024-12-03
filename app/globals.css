@@ -43,6 +43,9 @@
         @apply block px-4 py-2 text-sm data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none
     }
 
+
+
+
 	.what-is-skilline {
 	@apply bg-white text-[#696984];
 	}
@@ -82,11 +85,11 @@
 	}
 
 	.card-title {
-	@apply text-lg md:text-xl font-semibold uppercase mb-4;
+	@apply text-sm text-center lg:text-2xl md:text-xl font-semibold uppercase mb-4;
 	}
 
 	.cta-button {
-		@apply px-6 py-2 font-light rounded-full text-white w-full max-w-max hover:scale-110 transform transition-transform duration-500;
+		@apply px-6 py-2 font-light rounded-full text-wrap text-white w-full max-w-max hover:scale-110 transform transition-transform duration-500;
 	  }
 	
 	.cta-button-outline {
