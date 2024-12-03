@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "@prisma/client": "^6.0.1",
     "@tailwindcss/typography": "^0.5.15",
     "bcrypt": "^5.1.1",
+    "lucide-react": "^0.464.0",
     "next": "15.0.3",
     "next-auth": "^4.24.10",
     "prisma": "^6.0.1",

@@ -2,15 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    :root {
-        --radius: 0.5rem;
-    }
-    
+@layer base{
+:root {
+	--radius: 0.5rem;
+  }
+* {
+	font-family: var(--font-poppins), sans-serif;
 }
+  
+}
+@layer utilities{
+	.navbar {
+		@apply  bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal;
+	}
+	  
+	.logo {
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: #008cba;
+	  }
+	.btn-purple{
+		@apply bg-third px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-white cursor-pointer	;
+	}
+	.nav-link{
+		@apply flex flex-col sm:flex-row justify-between items-center gap-10;
+	}
+	.btn-white{
+		@apply bg-white px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-text cursor-pointer
+	}
 
+	.dropdown{
+        @apply inline-flex  justify-center items-center gap-x-1.5 px-3 font-normal ;
+    }
+
+    .dropdown-menuitems{
+        @apply absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in;
+    }
+
+    .dropdown-menuitem{
+        @apply block px-4 py-2 text-sm data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none
+    }
+}
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
 }

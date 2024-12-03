@@ -21,9 +21,9 @@ const config: Config =  {
             secondary: {
                 "300":"#F1EEDC",
                 DEFAULT: "#E5DDC5"
-
-
             },
+            third:"#767BC4",
+            text:"#252641",
             black: {
                 "100": "#333333",
                 "200": "#141413",
@@ -36,7 +36,7 @@ const config: Config =  {
             },
         },
         fontFamily: {
-            "work-sans": ["var(--font-work-sans)","sans-serif"],
+            poppins: ['var(--font-poppins)', 'sans-serif'],
         },
         borderRadius: {
             lg: "var(--radius)",
