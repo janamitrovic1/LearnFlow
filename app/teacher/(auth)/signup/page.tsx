@@ -13,6 +13,10 @@ interface FormData {
   confirmPassword: string;
 }
 
+interface ErrorData extends FormData {
+  request: string;
+}
+
 export default function StudentSignIn() {
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -21,7 +25,7 @@ export default function StudentSignIn() {
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState<Partial<FormData>>({});
+  const [error, setError] = useState<Partial<ErrorData>>({});
   const router = useRouter()
 
   const validateInput = (name: keyof FormData, value: string) => {
@@ -69,10 +73,12 @@ export default function StudentSignIn() {
     if (Object.keys(newErrors).length > 0) {
       setError(newErrors);
     } else {
-      await signIn("SignUpT", {
+      const res = await signIn("SignUpT", {
         redirect: false,
         ...formData
       })
+		  if(!res?.ok)
+			  setError({ request: "Invalid Credentials Are Provided!" })
       router.push("/teacher")
     }
   };
@@ -80,6 +86,7 @@ export default function StudentSignIn() {
   return (
     <div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-lg">
       <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
+      {error.request}
       <form onSubmit={handleSubmit}>
         {["firstName", "lastName", "email", "password", "confirmPassword"].map(
           (field) => (

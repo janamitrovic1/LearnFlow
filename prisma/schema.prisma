@@ -74,9 +74,9 @@ model Response {
 }
 
 model Answer {
-  id          String     @id @default(uuid())
-  questionId  String     @unique
-  responseId  String     @unique
+  questionId  String     
+  responseId  String     
   question    Question   @relation("QuestionAnswers", fields: [questionId], references: [id])
   response    Response   @relation("ResponseAnswers", fields: [responseId], references: [id])
+  @@id([questionId, responseId])
 }
