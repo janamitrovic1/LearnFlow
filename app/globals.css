@@ -13,7 +13,7 @@
 }
 @layer utilities{
 	.navbar {
-		@apply  bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal;
+		@apply bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal;
 	}
 	  
 	.logo {
@@ -42,6 +42,60 @@
     .dropdown-menuitem{
         @apply block px-4 py-2 text-sm data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none
     }
+
+	.what-is-skilline {
+	@apply bg-white text-[#696984];
+	}
+
+	.title {
+	@apply text-2xl md:text-4xl font-semibold text-[#B2B3CF] mb-4;
+	}
+
+	.highlight {
+	@apply text-text;
+	}
+
+	.subtitle {
+	@apply text-gray-600 text-sm md:text-lg leading-6 max-w-3xl mx-auto;
+	}
+
+	.cards {
+	@apply flex flex-col md:flex-row gap-6 justify-center items-center;
+	}
+
+	.card {
+	@apply relative rounded-lg overflow-hidden bg-gray-200 shadow-md w-full md:w-96 h-64;
+	background-size: cover;
+	background-position: center;
+	}
+
+	.card:nth-child(1) {
+	background-image: url('/public/homesection1.jpg'); /* Promeni putanju slike */
+	}
+
+	.card:nth-child(2) {
+	background-image: url('/public/homesection2.jpg'); /* Promeni putanju slike */
+	}
+
+	.overlay {
+	@apply flex flex-col justify-center items-center bg-black bg-opacity-50 text-white w-full h-full p-4;
+	}
+
+	.card-title {
+	@apply text-lg md:text-xl font-semibold uppercase mb-4;
+	}
+
+	.cta-button {
+		@apply px-6 py-2 font-light rounded-full text-white w-full max-w-max;
+	  }
+	
+	.cta-button-outline {
+		@apply border border-white bg-transparent bg-opacity-0;
+	}
+	
+	.cta-button-filled {
+		@apply bg-[#B2B3CF];
+	}
 }
 body {
 	color: var(--foreground);

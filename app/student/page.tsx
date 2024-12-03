@@ -1,4 +1,16 @@
+"use client"
+import { useSession } from 'next-auth/react'
+import React from 'react'
 
-export default function StudentIndex() {
-    return <h1>Hello Student!</h1>
+const Page = () => {
+    
+    const {data:session,status}:any = useSession();
+  
+  return (
+    <div>
+        Hello Student {session?.user.id}
+    </div>
+  )
 }
+
+export default Page

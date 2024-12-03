@@ -9,9 +9,11 @@ const Nav = () => {
     const {data:session,status}:any = useSession();
     return (
         <div className='navbar'>
-            <Link href="/" className='logo'>
-                Logo
-            </Link>
+            <div>
+                <Link href="/" className='logo'>
+                    Logo
+                </Link>
+            </div>
             <div className='nav-link'>
                 <Link href="/">
                     <span>Home</span>
@@ -24,7 +26,7 @@ const Nav = () => {
                         <Menu as="div" className="relative inline-block text-left">
                             <MenuButton>
                                 <div className="dropdown">
-                                    <Link href={`/profile/${session?.user.id}`} >
+                                    <Link href={`/${session?.user?.role=="student"&&"student"||"teacher"}`} >
                                         <span>{session?.user?.email}</span>  
                                     </Link>
                                     <ChevronDownIcon aria-hidden="true" className="-mr-1 size-5 text-gray-400"/>
@@ -38,7 +40,7 @@ const Nav = () => {
                             >
                                 <div className="py-1">
                                     <MenuItem>
-                                        <Link href={`/profile/${session?.user.id}`} className="dropdown-menuitem">
+                                        <Link href={`/${session?.user?.role=="student"&&"student"||"teacher"}`} className="dropdown-menuitem">
                                             Profile
                                         </Link>
                                     </MenuItem>

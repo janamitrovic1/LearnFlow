@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 const Hero = () => {
   return (
-    <div className="hero bg-primary rounded-b-[50px] flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-12 md:py-20">
+    <div className="hero bg-primary md:rounded-b-[200px] rounded-b-[100px] flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-12 md:py-20">
      {/*Left content */}
       	<div className="text-content text-center md:text-left">
 
