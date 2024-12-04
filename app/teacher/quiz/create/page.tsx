@@ -259,207 +259,210 @@ export default function CreateQuiz() {
   }, []);
   const questionTypes: QuestionType[] = ["CHECK", "RADIO", "INPUT"];
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl">
-        {error != "" && <p className="text-red-600">{error}</p>}
-        <h1 className="text-2xl font-bold text-center mb-6">
-          <input
-            type="text"
-            className="w-full p-2 border border-gray-300 rounded-lg"
-            placeholder="Enter Quiz Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </h1>
-
-        <div className="flex items-center gap-4 mb-6">
-          <span className="text-lg font-medium">Private Quiz:</span>
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              className="w-6 h-6 border-gray-300 rounded focus:ring-2 focus:ring-[#767BC4]"
-              checked={isPrivate}
-              onChange={() => setIsPrivate((prev) => !prev)}
-            />
-            <span className="text-sm text-gray-700">Enable/Disable</span>
-          </label>
-        </div>
-
-        <form className="space-y-4">
-          {questions.map((question: Question, index: number) => (
-            <fieldset
-              key={"form" + index}
-              className="p-4 border border-gray-300 rounded-lg"
-            >
-              <label htmlFor="text" className="block text-sm font-medium">
-                Enter question text:
-              </label>
-              <input
-                type="text"
-                className="w-full mt-2 p-2 border border-gray-300 rounded-lg"
-                name="text"
-                value={question?.text || ""}
-                onChange={(e) =>
-                  handleQuestionTextChange(e.target.value, index)
-                }
-              />
-
-              <div className="mt-4 space-y-2">
-                {(question.questionType === "RADIO" &&
-                  question.answers?.map((answer: string, i: number) => (
-                    <div key={i} className="flex items-center gap-4">
-                      <input
-                        type="radio"
-                        name={index + ""}
-                        className="focus:ring-[#767BC4]"
-                        onChange={() => handleRadioAnswer(index, i)}
-                      />
-                      <input
-                        type="text"
-                        className="p-2 border border-gray-300 rounded-lg"
-                        value={answer}
-                        onChange={(e) =>
-                          handleAnswerChange(e.target.value, index, i)
-                        }
-                      />
-                      <button
-                        type="button"
-                        className="text-[#767BC4] hover:text-[#252641]"
-                        onClick={() => deleteAnswer(index, i)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  ))) ||
-                  (question.questionType === "CHECK" &&
-                    question.answers?.map((answer: string, i: number) => (
-                      <div key={i} className="flex items-center gap-4">
-                        <input
-                          type="checkbox"
-                          className="focus:ring-[#767BC4]"
-                          onChange={() => handleCheckAnswer(index, i)}
-                        />
-                        <input
-                          type="text"
-                          className="p-2 border border-gray-300 rounded-lg"
-                          value={answer}
-                          onChange={(e) =>
-                            handleAnswerChange(e.target.value, index, i)
-                          }
-                        />
-                        <button
-                          type="button"
-                          className="text-[#767BC4] hover:text-[#252641]"
-                          onClick={() => deleteAnswer(index, i)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    ))) ||
-                  (question.questionType === "INPUT" && (
-                    <input
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+          <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl">
+              {error != "" && <p className="text-red-600">{error}</p>}
+              <h1 className="text-2xl font-bold text-center mb-6">
+                  <input
                       type="text"
                       className="w-full p-2 border border-gray-300 rounded-lg"
-                      value={question.answers ? question.answers[0] : ""}
-                      onChange={(e) =>
-                        handleAnswerChange(e.target.value, index, 0)
-                      }
-                    />
+                      placeholder="Enter Quiz Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                  />
+              </h1>
+  
+              <div className="flex items-center gap-4 mb-6">
+                  <span className="text-lg font-medium">Private Quiz:</span>
+                  <label className="flex items-center gap-2">
+                      <input
+                          type="checkbox"
+                          className="w-6 h-6 border-gray-300 rounded focus:ring-2 focus:ring-[#767BC4]"
+                          checked={isPrivate}
+                          onChange={() => setIsPrivate((prev) => !prev)}
+                      />
+                      <span className="text-sm text-gray-700">Enable/Disable</span>
+                  </label>
+              </div>
+  
+              <form className="space-y-4">
+                  {questions.map((question: Question, index: number) => (
+                      <fieldset
+                          key={"form" + index}
+                          className="p-4 border border-gray-300 rounded-lg"
+                      >
+                          <label htmlFor="text" className="block text-sm font-medium">
+                              Enter question text:
+                          </label>
+                          <input
+                              type="text"
+                              className="w-full mt-2 p-2 border border-gray-300 rounded-lg"
+                              name="text"
+                              value={question?.text || ""}
+                              onChange={(e) =>
+                                  handleQuestionTextChange(e.target.value, index)
+                              }
+                          />
+  
+                          <div className="mt-4 space-y-2">
+                              {(question.questionType === "RADIO" &&
+                                  question.answers?.map((answer: string, i: number) => (
+                                      <div key={i} className="flex items-center gap-4">
+                                          <input
+                                              type="radio"
+                                              name={index + ""}
+                                              className="focus:ring-[#767BC4]"
+                                              onChange={() => handleRadioAnswer(index, i)}
+                                          />
+                                          <input
+                                              type="text"
+                                              className="p-2 border border-gray-300 rounded-lg"
+                                              value={answer}
+                                              onChange={(e) =>
+                                                  handleAnswerChange(e.target.value, index, i)
+                                              }
+                                          />
+                                          <button
+                                              type="button"
+                                              className="text-[#767BC4] hover:text-[#252641]"
+                                              onClick={() => deleteAnswer(index, i)}
+                                          >
+                                              Delete
+                                          </button>
+                                      </div>
+                                  ))) ||
+                                  (question.questionType === "CHECK" &&
+                                      question.answers?.map((answer: string, i: number) => (
+                                          <div key={i} className="flex items-center gap-4">
+                                              <input
+                                                  type="checkbox"
+                                                  className="focus:ring-[#767BC4]"
+                                                  onChange={() => handleCheckAnswer(index, i)}
+                                              />
+                                              <input
+                                                  type="text"
+                                                  className="p-2 border border-gray-300 rounded-lg"
+                                                  value={answer}
+                                                  onChange={(e) =>
+                                                      handleAnswerChange(e.target.value, index, i)
+                                                  }
+                                              />
+                                              <button
+                                                  type="button"
+                                                  className="text-[#767BC4] hover:text-[#252641]"
+                                                  onClick={() => deleteAnswer(index, i)}
+                                              >
+                                                  Delete
+                                              </button>
+                                          </div>
+                                      ))) ||
+                                  (question.questionType === "INPUT" && (
+                                      <input
+                                          type="text"
+                                          className="w-full p-2 border border-gray-300 rounded-lg"
+                                          value={question.answers ? question.answers[0] : ""}
+                                          onChange={(e) =>
+                                              handleAnswerChange(e.target.value, index, 0)
+                                          }
+                                      />
+                                  ))}
+                          </div>
+  
+                          {question.questionType !== "INPUT" && (
+                              <button
+                                  type="button"
+                                  className="mt-4 mr-2 px-4 py-2 bg-[#767BC4] text-white rounded-lg hover:bg-[#252641]"
+                                  onClick={() => addAnswer(index)}
+                              >
+                                  Add Answer
+                              </button>
+                          )}
+                          <button
+                              type="button"
+                              className="mt-4 px-4 py-2 bg-[#BED7DC] text-[#252641] rounded-lg hover:bg-[#767BC4] hover:text-white"
+                              onClick={() => deleteQuestion(index)}
+                          >
+                              Delete Question
+                          </button>
+                      </fieldset>
+                  ))}
+              </form>
+  
+              <div className="mt-6 relative">
+                  <button
+                      className="px-4 py-2 bg-[#BED7DC] text-[#252641] rounded-lg hover:bg-[#767BC4] hover:text-white"
+                      onClick={toggleDropdown}
+                  >
+                      Add Question
+                  </button>
+                  {isDropdownOpen && (
+                      <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                          {questionTypes.map((type) => (
+                              <button
+                                  key={type}
+                                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                                  onClick={() => handleButtonClick(type)}
+                              >
+                                  {type}
+                              </button>
+                          ))}
+                      </div>
+                  )}
+              </div>
+  
+              <div className="mt-6 border-t pt-6">
+                  <h2 className="text-lg font-bold mb-4">Assign to Classes:</h2>
+                  {classes?.map((clasS: any, classIndex: number) => (
+                      <div key={classIndex} className="mb-4">
+                          <label className="flex items-center gap-2">
+                              <input
+                                  type="checkbox"
+                                  className="w-5 h-5 border-gray-300 rounded focus:ring-[#767BC4]"
+                                  checked={isClassFullyChecked(clasS.studentClass)}
+                                  onChange={(e) =>
+                                      handleClassCheckboxChange(clasS.studentClass, e.target.checked)
+                                  }
+                              />
+                              <span className="font-medium text-gray-800">{clasS?.name}</span>
+                              <span className="text-gray-500 text-sm">
+                                  - Students: {clasS?._count?.studentClass}
+                              </span>
+                          </label>
+                          <div className="ml-6 mt-2">
+                              {clasS.studentClass?.map((studentClass: any, studentIndex: number) => (
+                                  <div key={studentIndex} className="flex items-center gap-2">
+                                      <input
+                                          type="checkbox"
+                                          className="w-4 h-4 border-gray-300 rounded focus:ring-[#767BC4]"
+                                          checked={checkedStudentIds.includes(
+                                              studentClass?.student?.id
+                                          )}
+                                          onChange={(e) =>
+                                              handleStudentCheckboxChange(
+                                                  studentClass?.student?.id,
+                                                  e.target.checked
+                                              )
+                                          }
+                                      />
+                                      <span className="text-gray-700 text-sm">
+                                          {studentClass?.student?.firstName}{" "}
+                                          {studentClass?.student?.lastName}
+                                      </span>
+                                  </div>
+                              ))}
+                          </div>
+                      </div>
                   ))}
               </div>
-
-              {question.questionType !== "INPUT" && (
-                <button
-                  type="button"
-                  className="mt-4 mr-2 px-4 py-2 bg-[#767BC4] text-white rounded-lg hover:bg-[#252641]"
-                  onClick={() => addAnswer(index)}
-                >
-                  Add Answer
-                </button>
-              )}
+  
               <button
-                type="button"
-                className="mt-4 px-4 py-2 bg-[#BED7DC] text-[#252641] rounded-lg hover:bg-[#767BC4] hover:text-white"
-                onClick={() => deleteQuestion(index)}
+                  type="button"
+                  className="mt-6 px-6 py-2 bg-[#252641] text-white rounded-lg hover:bg-[#767BC4]"
+                  onClick={handleSubmit}
               >
-                Delete Question
+                  Submit
               </button>
-            </fieldset>
-          ))}
-        </form>
-
-        <div className="mt-6 relative">
-          <button
-            className="px-4 py-2 bg-[#BED7DC] text-[#252641] rounded-lg hover:bg-[#767BC4] hover:text-white"
-            onClick={toggleDropdown}
-          >
-            Add Question
-          </button>
-          {isDropdownOpen && (
-            <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-              {questionTypes.map((type) => (
-                <button
-                  key={type}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                  onClick={() => handleButtonClick(type)}
-                >
-                  {type}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-        <button
-          type="button"
-          className="mt-6 px-6 py-2 bg-[#252641] text-white rounded-lg hover:bg-[#767BC4]"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
+          </div>
       </div>
-      {/* Logika za izbor odelenja */}
-      <div>
-            {classes?.map((clasS: any, classIndex: number) => (
-                <div key={classIndex} className="class-container">
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={isClassFullyChecked(clasS.studentClass)}
-                            onChange={(e) =>
-                                handleClassCheckboxChange(clasS.studentClass, e.target.checked)
-                            }
-                        />
-                        <strong>{clasS?.name}</strong><span> - students: {clasS?._count?.studentClass}</span>
-                    </label>
-                    <div className="students-list">
-                        {clasS.studentClass?.map((studentClass: any, studentIndex: number) => (
-                            <div key={studentIndex} className="student-item">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        checked={checkedStudentIds.includes(
-                                            studentClass?.student?.id
-                                        )}
-                                        onChange={(e) =>
-                                            handleStudentCheckboxChange(
-                                                studentClass?.student?.id,
-                                                e.target.checked
-                                            )
-                                        }
-                                    />
-                                    {studentClass?.student?.firstName}{" "}
-                                    {studentClass?.student?.lastName}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ))}
-            <div className="checked-students">
-                <h4>Checked Student IDs:</h4>
-                <pre>{JSON.stringify(checkedStudentIds, null, 2)}</pre>
-            </div>
-        </div>
-    </div>
-  );
-}
+  )};
+  

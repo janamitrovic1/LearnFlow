@@ -84,64 +84,71 @@ export default function StudentSignIn() {
   };
 
   return (
-    <div className="md:max-w-md max-w-72 mx-auto mt-8 p-6 border rounded-md shadow-lg">
-      <h2 className="md:text-2xl text-xl font-semibold text-center mb-4">Sign Up As a Teacher</h2>
-      {error.request}
-      <form onSubmit={handleSubmit}>
-        {["firstName", "lastName", "email", "password", "confirmPassword"].map(
-          (field) => (
-            <div key={field} className="mb-4">
-              <label
-                htmlFor={field}
-                className={`block md:text-sm text-[10px] font-medium ${
-                  error[field as keyof FormData] ? "text-red-500" : "text-gray-700"
-                }`}
-              >
-                {field
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/^./, (str) => str.toUpperCase())}
-              </label>
-              <input
-                type={
-                  field.includes("password") || field.includes("confirmPassword")
-                    ? "password"
-                    : "text"
-                }
-                id={field}
-                name={field}
-                className={`w-full px-3 py-2 mt-1 border ${
-                  error[field as keyof FormData]
-                    ? "border-red-500"
-                    : "border-gray-300"
-                } bg-gray-50 text-gray-800 rounded-md focus:outline-none focus:ring-2 ${
-                  error[field as keyof FormData]
-                    ? "focus:ring-red-500"
-                    : "focus:ring-blue-500"
-                }`}
-                value={formData[field as keyof FormData]}
-                onChange={handleInputChange}
-              />
-              {error[field as keyof FormData] && (
-                <p className="text-red-500 text-sm mt-1">
-                  {error[field as keyof FormData]}
-                </p>
-              )}
-            </div>
-          )
-        )}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Sign Up
-        </button>
-        <p className="mt-4 text-center md:text-lg text-sm">
-          Already have an account?{" "}
-          <Link href="/teacher/signin" className="text-blue-600 hover:underline">
-            Sign In!
-          </Link>
-        </p>
-      </form>
+    <div className="min-h-screen flex justify-center items-center bg-gray-900 text-white">
+      <div className="w-full max-w-4xl bg-gray-800 rounded-xl shadow-xl overflow-hidden flex">
+        {/* Leva strana sa slikom i tekstom */}
+        <div className="hidden md:flex md:w-1/2 bg-[#252641] items-center justify-center p-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Capturing Moments, Creating Memories</h1>
+            <p className="text-gray-300">Join us to build amazing experiences.</p>
+          </div>
+        </div>
+  
+        {/* Desna strana sa formom */}
+        <div className="w-full md:w-1/2 p-8">
+          <h2 className="text-3xl font-semibold mb-4">Sign Up As a Teacher</h2>
+          {error?.request && (
+            <p className="text-red-400 mb-4 text-sm">{error.request}</p>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {["firstName", "lastName", "email", "password", "confirmPassword"].map((field) => (
+              <div key={field}>
+                <label
+                  htmlFor={field}
+                  className="block text-sm font-medium text-gray-400 mb-1"
+                >
+                  {field
+                    .replace(/([A-Z])/g, " $1")
+                    .replace(/^./, (str) => str.toUpperCase())}
+                </label>
+                <input
+                  type={
+                    field.includes("password") || field.includes("confirmPassword")
+                      ? "password"
+                      : "text"
+                  }
+                  id={field}
+                  name={field}
+                  className={`w-full px-4 py-2 border ${
+                    error[field as keyof FormData]
+                      ? "border-red-500"
+                      : "border-gray-700"
+                  } bg-gray-900 text-gray-200 rounded-lg focus:ring-[#767BC4] focus:border-[#767BC4]`}
+                  value={formData[field as keyof FormData]}
+                  onChange={handleInputChange}
+                />
+                {error[field as keyof FormData] && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {error[field as keyof FormData]}
+                  </p>
+                )}
+              </div>
+            ))}
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#767BC4] text-white rounded-lg hover:bg-[#5a5e99] transition-colors"
+            >
+              Sign Up
+            </button>
+            <p className="text-center text-sm text-gray-400">
+              Already have an account?{" "}
+              <Link href="/teacher/signin" className="text-[#767BC4] hover:underline">
+                Sign In!
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
-  );
-}
+  ) };
+  
