@@ -1,50 +1,59 @@
-"use client"
-import { useSession } from 'next-auth/react'
-import React from 'react'
+import React from "react";
+import TeachesClasses from "@/components/TeachesClasses";
+import TeachesQuizez from "@/components/TeachesQuizez";
 
-const Page = () => {
-    
-    const {data:session,status}:any = useSession();
-  
+const ProfessorDashboard = () => {
+  // Primer podataka o odeljenjima
+  const classes = [
+    { NameClass: 'Class 1', studentCount: 20 },
+    { NameClass: 'Class 2', studentCount: 25 },
+    { NameClass: 'Class 3', studentCount: 15 },
+  ];
+
+  // Primer podataka o kvizovima
+  const quizzes = [
+    { quizTitle: 'Quiz 1', className: 'Class 3' },
+    { quizTitle: 'Quiz 2', className: 'Class 1' },
+    { quizTitle: 'Quiz 3', className: 'Class 2' },
+  ];
+
   return (
-    
-	<div className="bg-gray-100 min-h-screen p-6">
-	
-	{/* Main Section */}
-	<main className="mt-6 flex">
-	  {/* Class Sections */}
-	  <div className="w-3/4">
-		<h1 className="text-2xl font-semibold text-gray-800">Classes</h1>
-		<div className="grid grid-cols-3 gap-4 mt-4">
-		  <div className="bg-white p-4 rounded shadow">
-			<img src="/path/to/class-icon.jpg" alt="Class Icon" className="h-10 w-10 rounded" />
-			<h2 className="text-lg font-semibold mt-2">Class 1</h2>
-			<p className="text-gray-600">20 students</p>
-		  </div>
-		  {/* Add more class cards similarly */}
-		</div>
-		
-		{/* Quiz History */}
-		<section className="mt-6">
-		  <h2 className="text-xl font-semibold text-gray-800">Quiz History</h2>
-		  <div className="mt-4">
-			<div className="bg-white p-4 rounded shadow">
-			  <h3 className="text-lg font-semibold">Quiz 1</h3>
-			  <p className="text-gray-600">Assigned on Jan 15, 2024</p>
-			</div>
-			{/* Add more quiz history cards similarly */}
-		  </div>
-		</section>
-	  </div>
-	  
-	  {/* Add Quiz Section */}
-	  <aside className="w-1/4 bg-white shadow p-4 ml-4">
-		<h2 className="text-xl font-semibold text-gray-800">Add New Quiz</h2>
-		<button className="mt-4 bg-blue-500 text-white p-2 rounded">Create Quiz</button>
-	  </aside>
-	</main>
-  </div>
-    );
-  };
+    <div className="bg-gray-100 min-h-screen p-6">
+      
+      {/* Main Section */}
+      <main className="mt-6 flex">
+        {/* Class Sections */}
+        <div className="w-full">
+          <h1 className="text-2xl font-semibold text-gray-800">Classes</h1>
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            {classes.map((classItem, index) => (
+              <TeachesClasses 
+                key={index} 
+                NameClass={classItem.NameClass} 
+                studentCount={classItem.studentCount} 
+              />
+            ))}
+          </div>
+          
+          {/* Quiz Section */}
+          <section className="mt-6">
+            <h2 className="text-xl font-semibold text-gray-800">Quiz</h2>
+            <div className="mt-4">
+              {quizzes.map((quizItem, index) => (
+                <TeachesQuizez
+                  key={index}
+                  quizTitle={quizItem.quizTitle}
+                  className={quizItem.className}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
+        
+       
+      </main>
+    </div>
+  );
+};
 
-export default Page
+export default ProfessorDashboard;
