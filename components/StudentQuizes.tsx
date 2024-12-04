@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link';
 export interface StudentQuizesType {
     quiz: {
       id: string; // ID kviza
@@ -20,7 +20,7 @@ export interface StudentQuizesType {
   
 const StudentQuizes = ({props}: StudentQuizesType) => {
     const {quiz}=props;
-    const {name,isPrivate,teacher,_count}=quiz;
+    const {name,id,isPrivate,teacher,_count}=quiz;
     const {firstName,lastName}=teacher;
     const {questions}=_count;
     let privacyStatus;
@@ -32,11 +32,11 @@ const StudentQuizes = ({props}: StudentQuizesType) => {
   return (
     <div className="bg-white p-4 flex flex-col justify-between rounded shadow mb-2">
         <div className='flex md:flex-row justify-between flex-col'>
-            <h3 className="text-lg truncate font-semibold">{name}</h3>
+            <h3 className="text-lg truncate font-semibold"><Link href={`/student/quiz/${id}`}>{name}</Link></h3>
             {/* <p className="text-text truncate">Status: {privacyStatus}</p> */}
         </div>
         <div>
-            <p className="text-black-100 truncate font-semibold">Professor: {firstName} {lastName}</p>
+            <p className="text-black-100 truncate font-semibold">Teacher Name: {firstName} {lastName}</p>
             <p className="text-black-300 truncate ">Number of Questions: {questions}</p>
         </div>
     </div>

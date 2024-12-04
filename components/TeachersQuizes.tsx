@@ -27,7 +27,7 @@ const TeachersQuizes = ({props}:TeachersQuizesType) => {
             <p className="text-text truncate">Status: {privacyStatus}</p>
         </div>
         <div>
-            {/* <p className="text-black-100 truncate font-semibold">Professor: {firstName} {lastName}</p> */}
+            {/* <p className="text-black-100 truncate font-semibold">Teacher: {firstName} {lastName}</p> */}
             <p className="text-black-300 truncate ">Number of Questions: {questions}</p>
         </div>
     </div>

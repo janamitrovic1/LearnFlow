@@ -1,9 +1,10 @@
 // "use client"
 import StudentClasses,{ StudentClassesType } from '@/components/StudentClasses'
 import StudentQuizes, { StudentQuizesType } from '@/components/StudentQuizes';
+import { PlusCircle } from 'lucide-react';
 // import { useSession } from 'next-auth/react'
 import React from 'react'
-
+import Link from 'next/link';
 const Page = async () => {
     
 	const res = await fetch(`${process.env.APP_API_URL}/api/student/class`, {
@@ -31,7 +32,14 @@ const Page = async () => {
       	<main className="mt-6 w-full flex">
 			{/* Class Sections */}
 			<div className="w-full">
-				<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Classes</h1>
+				<div className="flex flex-row gap-5 items-center">
+					<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text"><Link href="/student/class">Your Classes</Link></h1>
+					<Link href="student/class/join" className=" ">
+						<PlusCircle stroke="green"></PlusCircle>
+					</Link>
+				</div>
+					
+				
 				<div className="flex flex-wrap gap-4 mt-4">
 					{classes.length>0?classes.map((classItem, index) => (
 						<StudentClasses 
@@ -43,7 +51,7 @@ const Page = async () => {
 			
 			{/* Test Section */}
 			<section className="mt-6">
-				<h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Tests</h2>
+				<h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text"><Link href="/student/quiz/private">Your Private Quizzes</Link></h2>
 				<div className="mt-4">
 					{privateQuizes.length>0?privateQuizes.map((quizItem, index) => (
 						<StudentQuizes
@@ -55,7 +63,7 @@ const Page = async () => {
 			</section>
 			{/* Quiz Section */}
 			<section className="mt-6">
-				<h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Quizes</h2>
+				<h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text"><Link href="/student/quiz/public">Your Public Quizzes</Link></h2>
 				<div className="mt-4">
 					{publicQuizes.length>0?publicQuizes.map((quizItem, index) => (
 						<StudentQuizes
