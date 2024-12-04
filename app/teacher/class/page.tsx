@@ -1,19 +1,24 @@
-import Link from "next/link";
+import FullTeachersClasses from "@/components/FullTeacherClasses";
+import {TeachersClassesType} from "@/components/TeachersClasses";
+
 
 export default async function ClassPage() {
+
     const res = await fetch(process.env.APP_API_URL + "/api/teacher/class", {
         credentials: 'include'
     });
-    const { data } = await res.json();
+    const { data:classes } : { data: TeachersClassesType[] } = await res.json();
 
-    console.log(data);
+    console.log(classes);
 
-    return <div>
-        {data?.map((clasS: any, index: number) => (
-            <div>
-                <Link href={"class/" + clasS?.id}><h2>{clasS?.name}</h2></Link>
-                <p>{clasS?._count?.studentClass}</p>
-            </div>
-        ))}
-    </div>
+    return (
+        <div className="flex flex-wrap gap-4 mt-4">
+            {classes.length>0?classes.map((classItem, index) => (
+                <FullTeachersClasses 
+                    key={index} 
+                    props={classItem} 
+                />
+                )):<p className=''>No Classes Found</p>}
+        </div>
+    );
 }

@@ -1,59 +1,73 @@
 import React from "react";
+import { TeachersClassesType } from "@/components/TeachersClasses";
 import TeachersClasses from "@/components/TeachersClasses";
-import TeachersQuizez from "@/components/TeachersQuizes";
+import TeachersQuizes from "@/components/TeachersQuizes";
+import { TeachersQuizesType } from "@/components/TeachersQuizes";
+import Link from "next/link";
+import { PlusCircle } from "lucide-react";
+const Page = async () => {
+  
+    const res = await fetch(`${process.env.APP_API_URL}/api/teacher/class`, {
+    	credentials: "include",
+  	});
+	const { data: classes }: { data: TeachersClassesType[] }= await res.json();
 
-const ProfessorDashboard = () => {
-  // Primer podataka o odeljenjima
-  const classes = [
-    { NameClass: 'Class 1', studentCount: 20 },
-    { NameClass: 'Class 2', studentCount: 25 },
-    { NameClass: 'Class 3', studentCount: 15 },
-  ];
+	console.log(classes);
 
-  // Primer podataka o kvizovima
-  const quizzes = [
-    { quizTitle: 'Quiz 1', className: 'Class 3' },
-    { quizTitle: 'Quiz 2', className: 'Class 1' },
-    { quizTitle: 'Quiz 3', className: 'Class 2' },
-  ];
+
+	const res2 = await fetch(`${process.env.APP_API_URL}/api/teacher/quiz`, {
+    	credentials: "include",
+	});
+	const { data: quizes }: { data: TeachersQuizesType[] }= await res2.json();
+
+	console.log(quizes);
+
+	
+	// const privateQuizes = quizes.filter((quizItem) => quizItem.quiz.isPrivate);
+	// const publicQuizes = quizes.filter((quizItem) => !quizItem.quiz.isPrivate);
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">
       
-      {/* Main Section */}
-      <main className="mt-6 flex">
-        {/* Class Sections */}
-        <div className="w-full">
-          <h1 className="text-2xl font-semibold text-gray-800">Classes</h1>
-          <div className="grid grid-cols-3 gap-4 mt-4">
-            {classes.map((classItem, index) => (
-              <TeachersClasses 
-                key={index} 
-                NameClass={classItem.NameClass} 
-                studentCount={classItem.studentCount} 
-              />
-            ))}
-          </div>
-          
-          {/* Quiz Section */}
-          <section className="mt-6">
-            <h2 className="text-xl font-semibold text-gray-800">Quiz</h2>
-            <div className="mt-4">
-              {quizzes.map((quizItem, index) => (
-                <TeachersQuizez
-                  key={index}
-                  quizTitle={quizItem.quizTitle}
-                  className={quizItem.className}
-                />
-              ))}
-            </div>
-          </section>
-        </div>
-        
-       
-      </main>
+      	<main className="mt-6 w-full flex">
+			{/* Class Sections */}
+			<div className="w-full">
+				<div className="flex flex-row gap-5 items-center">
+					<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text"><Link href="/teacher/class">Your Classes</Link></h1>
+					<Link href="teacher/class/create" className=" ">
+						<PlusCircle stroke="green"></PlusCircle>
+					</Link>
+				</div>
+				<div className="flex flex-wrap gap-4 mt-4">
+					{classes.length>0?classes.map((classItem, index) => (
+						<TeachersClasses 
+						key={index} 
+						props={classItem} 
+						/>
+					)):<p className=''>No Classes Found</p>}
+				</div>
+			
+			{/* Test Section */}
+			<section className="mt-6">
+				<div className="flex flex-row gap-5 items-center">
+					<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Quizzes</h1>
+					<Link href="teacher/quiz/create" className=" ">
+						<PlusCircle stroke="green"></PlusCircle>
+					</Link>
+				</div>
+				<div className="mt-4">
+					{quizes.length>0?quizes.map((quizItem, index) => (
+						<TeachersQuizes
+							key={index}
+							props={quizItem}
+						/>
+					)):<p className=''>No Tests Found.</p>}
+				</div>
+			</section>
+			</div>
+      	</main>
     </div>
   );
 };
 
-export default ProfessorDashboard;
+export default Page;

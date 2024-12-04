@@ -13,6 +13,7 @@ export async function GET() {
             select: {
                 id: true, 
                 name: true,
+                isPrivate:true,
                 _count: {
                     select: {
                         questions: true,

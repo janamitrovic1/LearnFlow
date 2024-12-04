@@ -1,16 +1,37 @@
 import React from 'react';
 
-const TeachersQuizez = ({ quizTitle, className }: 
-    {
-        quizTitle?: string, className?: string;
-    }
-) => {
-  return (
-    <div className="bg-white p-4 rounded shadow mb-2"> 
-      <h3 className="text-lg font-semibold">{quizTitle}</h3>
-      <p className="text-gray-600">{className}</p>
-    </div>
-  );
+
+export interface TeachersQuizesType {
+  id: string; // Jedinstveni identifikator klase
+  name: string; // Naziv klase
+  isPrivate:boolean;
+  _count: {
+      questions: number; // Broj pitanja vezanih za klasu
+  };
+
 }
 
-export default TeachersQuizez;
+const TeachersQuizes = ({props}:TeachersQuizesType) => {
+	const {name,_count,isPrivate}=props;
+	const {questions} = _count;
+	let privacyStatus;
+    if (isPrivate)
+        privacyStatus="Private"
+    else
+        privacyStatus="Public"
+
+	return (
+		<div className="bg-white p-4 flex flex-col justify-between rounded shadow mb-2">
+        <div className='flex md:flex-row justify-between flex-col'>
+            <h3 className="text-lg truncate font-semibold">{name}</h3>
+            <p className="text-text truncate">Status: {privacyStatus}</p>
+        </div>
+        <div>
+            {/* <p className="text-black-100 truncate font-semibold">Professor: {firstName} {lastName}</p> */}
+            <p className="text-black-300 truncate ">Number of Questions: {questions}</p>
+        </div>
+    </div>
+	);
+}
+
+export default TeachersQuizes;

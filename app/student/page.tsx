@@ -25,7 +25,6 @@ const Page = async () => {
 	const privateQuizes = quizes.filter((quizItem) => quizItem.quiz.isPrivate);
 	const publicQuizes = quizes.filter((quizItem) => !quizItem.quiz.isPrivate);
 
-
   	return (
     <div className="bg-gray-100 min-h-screen p-6">
       
