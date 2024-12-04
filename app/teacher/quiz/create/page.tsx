@@ -162,20 +162,80 @@ export default function CreateQuiz() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const validateForm = (): string | null => {
+    if (!name.trim()) {
+      return "Quiz name is required.";
+    }
+
+    if (questions.length === 0) {
+      return "At least one question is required.";
+    }
+
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+
+      if (!question.text?.trim()) {
+        return `Question ${i + 1} is missing a text value.`;
+      }
+
+      if (!["RADIO", "CHECK", "INPUT"].includes(question.questionType)) {
+        return `Question ${i + 1} has an invalid question type.`;
+      }
+
+      if (
+        (question.questionType === "RADIO" || question.questionType === "CHECK") &&
+        (!question.answers || question.answers.length === 0)
+      ) {
+        return `Question ${i + 1} must have at least one answer option.`;
+      }
+
+      if (
+        question.correctAnswers &&
+        question.correctAnswers.some(
+          (index) => !question.answers || !question.answers[index]
+        )
+      ) {
+        return `Question ${i + 1} has invalid correct answers.`;
+      }
+    }
+
+    return null;
+  };
+
   const handleSubmit = async () => {
+    const validationError = validateForm();
+
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setError(null);
+
     try {
-      console.log(questions);
-      const data = await fetch("http://localhost:3000/api/teacher/quiz", {
+      const response = await fetch("http://localhost:3000/api/teacher/quiz", {
         method: "POST",
         body: JSON.stringify({
-          name, isPrivate, questions, students: checkedStudentIds
+          name,
+          isPrivate,
+          questions,
         }),
-        credentials: 'include'
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-      console.log(await data.json(), process.env.APP_API_URL);
-    } catch (error) {
-      setError("Failed to make quiz!");
-      console.log(process.env.APP_API_URL)
+
+      const result = await response.json();
+      console.log(result);
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to submit quiz.");
+      }
+
+      alert("Quiz submitted successfully!");
+    } catch (err) {
+      console.error(err);
+      setError("Failed to submit quiz.");
     }
   };
 
@@ -194,6 +254,7 @@ export default function CreateQuiz() {
 return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl">
+          {error != "" && <p>{error}</p>}
             <h1 className="text-2xl font-bold text-center mb-6">
                 <input
                     type="text"

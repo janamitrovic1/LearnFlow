@@ -68,14 +68,15 @@ export async function POST(req: Request) {
                 })
             })
         );
-        students.map(async(student: any) => {
-            await prisma.studentQuiz.create({
-                data: {
-                    studentId: student,
-                    quizId: quiz.id
-                }
+        if(students)
+            students.map(async(student: any) => {
+                await prisma.studentQuiz.create({
+                    data: {
+                        studentId: student,
+                        quizId: quiz.id
+                    }
+                });
             });
-        });
         return Response.json({ msg: "Quiz created successfully" }, { status: 201 });
     } catch (error) {
         console.log(error);
