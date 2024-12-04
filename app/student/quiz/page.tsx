@@ -42,8 +42,8 @@ const Quizzes = () => {
         <div>
             {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
             {quizzes.length > 0 ? (
-                quizzes.map((quiz: any) => (
-                    <Link href={"quiz/" + quiz?.id}>
+                quizzes.map((quiz: any, index: number) => (
+                    <Link href={"quiz/" + quiz?.id} key={index}>
                         <div key={quiz.id}>
                             <h2>{quiz.name}</h2>
                             <p>{quiz.teacher.firstName + ' ' + quiz.teacher.lastName}</p>

@@ -2,19 +2,22 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CheckQuiz } from "./_action/actions";
+import { CheckQuiz, getCorrectAnswers } from "./_action/actions";
 import TestReport from "@/components/TestReport";
 
 export default function Quiz() {
   const { id } = useParams();
   const [quiz, setQuiz] = useState<any>(null);
   const [report, setReport] = useState<any>(null)
+  const [correct, setCorrect] = useState<any>([])
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const result = await CheckQuiz(formData);
+    const correctAnswers = await getCorrectAnswers(formData);
 
+    setCorrect(correctAnswers);
     setReport(result);
   };
 
@@ -33,7 +36,7 @@ export default function Quiz() {
     return <h2>Loading...</h2>;
 
   if(report) 
-    return <TestReport report={report}/>; 
+    return <TestReport report={report} correct={correct}/>; 
 
   return (
     <form onSubmit={handleSubmit}>
