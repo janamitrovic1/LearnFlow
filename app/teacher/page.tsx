@@ -1,6 +1,6 @@
 import React from "react";
-import TeachesClasses from "@/components/TeachesClasses";
-import TeachesQuizez from "@/components/TeachesQuizez";
+import TeachersClasses from "@/components/TeachersClasses";
+import TeachersQuizez from "@/components/TeachersQuizes";
 
 const ProfessorDashboard = () => {
   // Primer podataka o odeljenjima
@@ -27,7 +27,7 @@ const ProfessorDashboard = () => {
           <h1 className="text-2xl font-semibold text-gray-800">Classes</h1>
           <div className="grid grid-cols-3 gap-4 mt-4">
             {classes.map((classItem, index) => (
-              <TeachesClasses 
+              <TeachersClasses 
                 key={index} 
                 NameClass={classItem.NameClass} 
                 studentCount={classItem.studentCount} 
@@ -40,7 +40,7 @@ const ProfessorDashboard = () => {
             <h2 className="text-xl font-semibold text-gray-800">Quiz</h2>
             <div className="mt-4">
               {quizzes.map((quizItem, index) => (
-                <TeachesQuizez
+                <TeachersQuizez
                   key={index}
                   quizTitle={quizItem.quizTitle}
                   className={quizItem.className}

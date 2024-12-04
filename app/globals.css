@@ -13,7 +13,7 @@
 	}
 @layer utilities{
 	.navbar {
-		@apply bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal;
+		@apply bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal max-w-full;
 	}
 	  
 	.logo {
@@ -32,7 +32,7 @@
 	}
 
 	.dropdown{
-        @apply inline-flex  justify-center items-center gap-x-1.5 px-3 font-normal ;
+        @apply inline-flex  justify-center items-center gap-x-1.5 px-3 truncate font-normal ;
     }
 
     .dropdown-menuitems{
@@ -42,9 +42,6 @@
     .dropdown-menuitem{
         @apply block px-4 py-2 text-sm data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none
     }
-
-
-
 
 	.what-is-skilline {
 	@apply bg-white text-[#696984];

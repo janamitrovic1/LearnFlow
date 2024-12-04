@@ -7,10 +7,7 @@ export async function GET() {
         const session : any = await getServerSession(authOptions);
         const studentPrivateQuizzes = await prisma.studentQuiz.findMany({
             where: {
-              studentId: session.user.id, 
-              quiz: {
-                isPrivate: true, 
-              },
+              studentId: session?.user?.id, 
             },
             include: {
               quiz: {
@@ -33,6 +30,7 @@ export async function GET() {
           
         return Response.json({ data: studentPrivateQuizzes }, { status: 200 });          
     } catch (error) {
+      console.log(error);
         return Response.json({ err: error }, { status: 500 });
     }
 }

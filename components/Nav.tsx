@@ -26,8 +26,8 @@ const Nav = () => {
                         <Menu as="div" className="relative inline-block text-left">
                             <MenuButton>
                                 <div className="dropdown">
-                                    <Link href={`/${session?.user?.role=="student"&&"student"||"teacher"}`} >
-                                        <span>{session?.user?.email}</span>  
+                                    <Link href={`/${session?.user?.role=="student"&&"student"||"teacher"}`}>
+                                        <span className='truncate'>{session?.user?.email}</span>  
                                     </Link>
                                     <ChevronDownIcon aria-hidden="true" className="-mr-1 size-5 text-gray-400"/>
                                     

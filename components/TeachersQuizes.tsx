@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TeachesQuizez = ({ quizTitle, className }: 
+const TeachersQuizez = ({ quizTitle, className }: 
     {
         quizTitle?: string, className?: string;
     }
@@ -13,4 +13,4 @@ const TeachesQuizez = ({ quizTitle, className }:
   );
 }
 
-export default TeachesQuizez;
+export default TeachersQuizez;
