@@ -6,18 +6,27 @@ export async function GET(req: Request, { params } : { params : { id: string}}) 
         const clasS = await prisma.class.findFirst({
             where: { id },
             include: {
-                _count: {
-                    select: {
-                        studentClass: true
-                    }
+              _count: {
+                select: {
+                  studentClass: true,
                 },
-                studentClass: {
-                    include: {
-                        student: true
-                    }
-                }
-            }
-        });
+              },
+              studentClass: {
+                include: {
+                  student: {
+                    select: {
+                      id: true,
+                      firstName: true,
+                      lastName: true,
+                      email: true,
+                      image: true, 
+                    },
+                  },
+                },
+              },
+            },
+          });
+          
         return Response.json({ data: clasS }, { status: 200 });
     } catch (error) {
         console.log(error);

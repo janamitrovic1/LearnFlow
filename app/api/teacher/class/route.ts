@@ -7,7 +7,7 @@ export async function GET(){
         const session : any = await getServerSession(authOptions);
         const classes = await prisma.class.findMany({
             where: {
-                teacherId: session?.user.id
+                teacherId: session?.user?.id
             },
             include: {
                 _count: {
