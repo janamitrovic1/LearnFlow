@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TeachesClasses = ({ NameClass, studentCount }: 
+const TeachersClasses = ({ NameClass, studentCount }: 
     {
         NameClass?:string, studentCount?: number;
         
@@ -15,4 +15,4 @@ const TeachesClasses = ({ NameClass, studentCount }:
   );
 }
 
-export default TeachesClasses;
+export default TeachersClasses;

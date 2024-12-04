@@ -1,82 +1,74 @@
-"use client"
-import { useSession } from 'next-auth/react'
+// "use client"
+import StudentClasses,{ StudentClassesType } from '@/components/StudentClasses'
+import StudentQuizes, { StudentQuizesType } from '@/components/StudentQuizes';
+// import { useSession } from 'next-auth/react'
 import React from 'react'
 
-const Page = () => {
+const Page = async () => {
     
-    const {data:session,status}:any = useSession();
-  
-  return (
-    <div className="min-h-screen flex justify-between md:flex-row flex-col p-6">
-        {/* Main Section */}
-          
-        <div className="">
-            {/* Search and Filters */}
-			<div className="flex justify-between items-center mt-4">
-				<h1 className="text-2xl font-semibold text-text">My Learning</h1>
+	const res = await fetch(`${process.env.APP_API_URL}/api/student/class`, {
+        credentials: "include",
+    });
+    const { data: classes }: { data: StudentClassesType[] } = await res.json();
 
-				<input type="text" placeholder="Search" className="border rounded p-2 w-1/3" />
-				<select className="border rounded p-2">
-				<option value="academy">Academy</option>
-				<option value="type">Type</option>
-				</select>
-				<div className="flex space-x-2">
-				<button className="p-2 bg-gray-200 rounded">Grid View</button>
-				<button className="p-2 bg-gray-200 rounded">List View</button>
+	console.log(classes);
+
+
+	const res2 = await fetch(`${process.env.APP_API_URL}/api/student/quiz`, {
+        credentials: "include",
+    });
+    const { data: quizes }: { data: StudentQuizesType[] } = await res2.json();
+
+	console.log(quizes);
+
+
+	const privateQuizes = quizes.filter((quizItem) => quizItem.quiz.isPrivate);
+	const publicQuizes = quizes.filter((quizItem) => !quizItem.quiz.isPrivate);
+
+
+  	return (
+    <div className="bg-gray-100 min-h-screen p-6">
+      
+      	<main className="mt-6 w-full flex">
+			{/* Class Sections */}
+			<div className="w-full">
+				<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Classes</h1>
+				<div className="flex flex-wrap gap-4 mt-4">
+					{classes.length>0?classes.map((classItem, index) => (
+						<StudentClasses 
+						key={index} 
+						props={classItem} 
+						/>
+					)):<p className=''>No Classes Found</p>}
 				</div>
-			</div>
 			
-			{/* Private Courses */}
+			{/* Test Section */}
 			<section className="mt-6">
-				<h2 className="text-xl font-semibold text-gray-800">Private Courses</h2>
-				<div className="grid grid-cols-3 gap-4 mt-4">
-				<div className="bg-white p-4 rounded shadow">
-					<div className="text-green-600 text-sm">INTERMEDIATE</div>
-					<img src="/path/to/private-course-image.jpg" alt="Course" className="w-full h-32 object-cover mt-2" />
-					<h3 className="text-lg font-semibold mt-2">Cybersecurity Essentials</h3>
-					<p className="text-gray-600">Elektro-saobraćajna tehnička...</p>
-					<p className="text-gray-600">Instructor-led</p>
-					<p className="text-gray-600">Sep 18, 2024 - Oct 18, 2025</p>
+				<h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Tests</h2>
+				<div className="mt-4">
+					{privateQuizes.length>0?privateQuizes.map((quizItem, index) => (
+						<StudentQuizes
+							key={index}
+							props={quizItem}
+						/>
+					)):<p className=''>No Tests Found.</p>}
 				</div>
-				{/* Add more private course cards similarly */}
+			</section>
+			{/* Quiz Section */}
+			<section className="mt-6">
+				<h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Quizes</h2>
+				<div className="mt-4">
+					{publicQuizes.length>0?publicQuizes.map((quizItem, index) => (
+						<StudentQuizes
+							key={index}
+							props={quizItem}
+						/>
+					)):<p className=''>No Quizes Found.</p>}
 				</div>
-			</section>{/* Public Courses */}
-          <section className="mt-6">
-            <h2 className="text-xl font-semibold text-gray-800">Public Courses</h2>
-            <div className="grid grid-cols-3 gap-4 mt-4">
-              <div className="bg-white p-4 rounded shadow">
-                <div className="text-green-600 text-sm">BEGINNER</div>
-                <img src="/path/to/public-course-image.jpg" alt="Course" className="w-full h-32 object-cover mt-2" />
-                <h3 className="text-lg font-semibold mt-2">Networking Basics</h3>
-                <p className="text-gray-600">Technical College...</p>
-                <p className="text-gray-600">Self-paced</p>
-                <p className="text-gray-600">Available Anytime</p>
-              </div>
-              {/* Add more public course cards similarly */}
-            </div>
-          </section>
-        </div>
-          
-          
-          
-        
-        {/* Sidebar */}
-        <aside className="w-1/4 bg-secondary-300 shadow p-4 ml-4">
-          <h2 className="text-xl font-semibold text-gray-800">Recent Achievements</h2>
-          <div className="mt-4">
-            <div className="flex items-center space-x-2">
-              <img src="/path/to/badge.jpg" alt="Badge" className="h-8 w-8" />
-              <span className="text-gray-700">IT Essentials Badge</span>
-            </div>
-            <div className="flex items-center space-x-2 mt-2">
-              <img src="/path/to/certificate.jpg" alt="Certificate" className="h-8 w-8" />
-              <span className="text-gray-700">IT Essentials Certificate</span>
-            </div>
-            {/* Add more achievements similarly */}
-          </div>
-        </aside>
-        
-      </div>
+			</section>
+			</div>
+      	</main>
+    </div>
   )
 }
 
