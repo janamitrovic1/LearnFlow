@@ -30,7 +30,7 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         const session : any = await getServerSession(authOptions);
-        const { name, isPrivate, questions } = await req.json();
+        const { name, isPrivate, questions, students } = await req.json();
         const quiz = await prisma.quiz.create({
             data: {
                 name,
@@ -69,6 +69,14 @@ export async function POST(req: Request) {
                     
             })
         );
+        students.map(async(student: any) => {
+            await prisma.studentQuiz.create({
+                data: {
+                    studentId: student,
+                    quizId: quiz.id
+                }
+            });
+        });
         return Response.json({ msg: "Quiz created successfully" }, { status: 201 });
     } catch (error) {
         console.log(error);
