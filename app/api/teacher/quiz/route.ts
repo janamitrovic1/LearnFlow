@@ -70,7 +70,7 @@ export async function POST(req: Request) {
             })
         );
         if(students)
-            students.map(async(student: any) => {
+            students?.map(async(student: any) => {
                 await prisma.studentQuiz.create({
                     data: {
                         studentId: student,

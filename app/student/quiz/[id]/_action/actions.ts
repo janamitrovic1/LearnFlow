@@ -12,13 +12,13 @@ export const CheckQuiz = async(formData: FormData) => {
         data?.questions?.map((question: any) => {
             if(question?.questionType == "RADIO") {
                 const answer = formData.get(question?.id)
-                const questionRep = { id: answer, text: question?.text, answer: formData.get(question?.id + "-text"), correct: false }
+                const questionRep = { type: "RADIO", id: answer, text: question?.text, answer: formData.get(question?.id + "-text"), correct: false }
                 if(question?.answers[0]?.responseId == answer)
                     questionRep.correct = true;
                 report.push(questionRep);
             } else if(question?.questionType == "CHECK") {
                 const answers = formData.getAll(question?.id);
-                const questionRep:any = {text: question?.text, answers: []};
+                const questionRep:any = {type: "CHECK", text: question?.text, answers: []};
                 answers?.map((answer: any, index: number) => {
                     const qr = { id:answer, answer: formData.get(question?.id + "-" + answer), correct: false };
                     question?.answers?.map((correctAnswer: any) => {
@@ -30,7 +30,7 @@ export const CheckQuiz = async(formData: FormData) => {
                 report.push(questionRep);
             } else if(question?.questionType == "INPUT") {
                 const answer = formData.get(question?.id);
-                const questionRep = { id: question?.answers[0]?.responseId, text: question?.text, answer, correct: false }
+                const questionRep = { type: "INPUT", id: question?.answers[0]?.responseId, text: question?.text, answer, correct: false }
                 if(question?.responses[0]?.text == answer)
                     questionRep.correct = true;
                 report.push(questionRep)
@@ -42,4 +42,11 @@ export const CheckQuiz = async(formData: FormData) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const getCorrectAnswers = async(formData: FormData) => {
+    const quizid = formData.get("_id") + "";
+    const res = await fetch(`/api/student/quiz/${quizid}/correct`);
+    const { data } = await res.json();
+    return data;
 }
