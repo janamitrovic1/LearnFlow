@@ -20,6 +20,12 @@ export async function GET() {
                       questions: true, 
                     },
                   },
+                  teacher: {
+                    select: {
+                      firstName: true,
+                      lastName: true
+                    }
+                  }
                 },
               },
             },

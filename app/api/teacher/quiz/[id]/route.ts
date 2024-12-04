@@ -120,13 +120,12 @@ export async function PUT(req: Request, { params }: { params: any }) {
           );
                     
         
-        return Response.json({ message: "Quiz updted successfully!"}, { status: 200 });
+        return Response.json({ message: "Quiz updated successfully!"}, { status: 200 });
         
     } catch (error) {
         console.log(error);
         return Response.json({ err: error }, { status: 500 });
     }
-      
 }
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
