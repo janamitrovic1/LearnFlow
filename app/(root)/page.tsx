@@ -6,7 +6,7 @@ export default function Home() {
 		<div className="px-16">
 			<section className="what-is-skilline py-16 px-6 md:px-20">
 				<div className="text-center mb-12">
-					<h2 className="title">What is <span className="highlight">LearnFlow?</span></h2>
+					<h2 id="us" className="title">What is <span className="highlight">LearnFlow?</span></h2>
 					<p className="subtitle">
 					LearnFlow is a platform that allows educators to create online classes whereby they can store the course materials online; manage assignments, quizzes, and exams; monitor due dates; grade results and provide students with feedback all in one place.
 					</p>
@@ -70,15 +70,16 @@ export default function Home() {
 				</div>
 
 				<div className="mt-12 text-center ">
-					<h3 className="text-text text-[1.5rem] md:text-[4xl] font-medium mb-6">
+					<h3 className="text-text text-2xl md:text-4xl font-semibold mb-6">
 					Everything you can do in a physical classroom, <span className="text-[#B2B3CF]">you can do with LearnFlow</span>
 					</h3>
-					<p className="font-normal text-sm md:text-lg  text-gray-500 mb-6">
+					<p className="font-normal sm:text-lg text-sm  text-gray-500 mb-6">
 						FlearnFlow’s school management software helps traditional and online schools manage scheduling, attendance, payments, and virtual classrooms all in one secure cloud-based system.
 					</p>
 					<button className="feature-button">Learn more</button>
 				</div>
 			</div>
+			
 			{/* <section className="assessments-section py-16 px-6 md:px-20 bg-white">
 				<div className="grid md:grid-cols-2 gap-8 items-center">
 					<div className="question-card bg-white shadow-lg rounded-lg p-6 relative">
@@ -120,5 +121,6 @@ export default function Home() {
 			</section> */}
 		</div>
   	</div>
+	
   	);
 }

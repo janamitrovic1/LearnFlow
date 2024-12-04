@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 const poppins = localFont(
   {
@@ -70,6 +71,7 @@ export default function RootLayout({
           <AuthProvider>
             <Nav/>
             {children}
+            <Footer />
           </AuthProvider>
 
       </body>

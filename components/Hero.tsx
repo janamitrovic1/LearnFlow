@@ -6,7 +6,7 @@ const Hero = () => {
      {/*Left content */}
       	<div className="text-content text-center md:text-left">
 
-			<h1 className="text-4xl md:text-5xl font-bold text-black-100 leading-snug">
+			<h1 className="text-4xl md:text-5xl font-bold text-white leading-snug">
 				<span className="text-third">Studying</span> Online is now <br />
 				much easier
 			</h1>
@@ -18,7 +18,7 @@ const Hero = () => {
 
 			<div className="mt-6 flex flex-col md:flex-row items-center gap-4">
 
-				<button className="btn-join bg-third text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-third">
+				<button className="btn-join hover:scale-110 transform transition-transform duration-500 bg-third text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-third">
 					Join for free
 				</button>
 				<div className="flex items-center gap-2">
@@ -36,9 +36,9 @@ const Hero = () => {
       {/* Right content */}
       <div className="image-content mt-8 md:mt-0">
         <img
-          src="zena.png"
+          src="devojka.svg"
           alt="Smiling student holding books"
-          className="w-full max-w-md md:max-w-lg rounded-br-[50px] rounded-bl-[50px] shadow-lg"
+          className="w-72 max-w-md md:max-w-lg rounded-br-[50px] rounded-bl-[50px] shadow-lg"
         />
       </div>
     </div>

@@ -18,7 +18,7 @@ const Nav = () => {
                 <Link href="/">
                     <span>Home</span>
                 </Link>
-                <Link href="#">
+                <Link href="#us">
                     <span>About Us</span>
                 </Link>
                 {status === "authenticated" ? (
