@@ -73,15 +73,15 @@ export default function StudentSignIn() {
 	}
   };
 return(
-<div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-lg">
+<div className="md:max-w-md max-w-72 mx-auto mt-8 p-6 border rounded-md shadow-lg">
   <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-	<h2 className="text-2xl font-semibold text-center mb-4">Sign In</h2>
+	<h2 className="md:text-2xl text-xl font-semibold text-center mb-4">Sign In As a Teacher</h2>
 	{error?.request}
 	{["email", "password"].map((field) => (
 	  <div key={field} className="mb-4">
 		<label
 		  htmlFor={field}
-		  className="block text-sm font-medium text-gray-700"
+		  className="block md:text-sm text-[10px]  font-medium text-gray-700"
 		>
 		  {field
 			.replace(/([A-Z])/g, " $1")
@@ -108,7 +108,7 @@ return(
 	>
 	  Sign In
 	</button>
-	<p className="mt-4 text-center">
+	<p className="mt-4 text-center md:text-lg text-sm">
 	  Don&apos;t have an account?{" "}
 	  <Link href="/teacher/signup" className="text-blue-600 hover:underline">
 		Sign Up!

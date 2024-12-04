@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer base{
-:root {
-	--radius: 0.5rem;
-  }
-* {
-	font-family: var(--font-poppins), sans-serif;
-}
-  
-}
+	:root {
+		--radius: 0.5rem;
+	}
+	* {
+		font-family: var(--font-poppins), sans-serif;
+	}
+
+	}
 @layer utilities{
 	.navbar {
 		@apply bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal;

@@ -71,7 +71,6 @@ export default function RootLayout({
           <AuthProvider>
             <Nav/>
             {children}
-            <Footer />
           </AuthProvider>
 
       </body>

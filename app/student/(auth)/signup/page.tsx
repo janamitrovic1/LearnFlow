@@ -83,8 +83,8 @@ export default function StudentSignIn() {
     }
   };
  return(
-  <div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-lg">
-  <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
+  <div className="md:max-w-md max-w-72 mx-auto mt-8 p-6 border rounded-md shadow-lg">
+  <h2 className="md:text-2xl text-xl font-semibold text-center mb-4">Sign Up As a Student</h2>
   {error.request}
   <form onSubmit={handleSubmit}>
     {["firstName", "lastName", "email", "password", "confirmPassword"].map(
@@ -92,7 +92,7 @@ export default function StudentSignIn() {
         <div key={field} className="mb-4">
           <label
             htmlFor={field}
-            className={`block text-sm font-medium ${
+            className={`block md:text-sm text-[10px] font-medium ${
               error[field as keyof FormData] ? "text-red-500" : "text-gray-700"
             }`}
           >
@@ -134,7 +134,7 @@ export default function StudentSignIn() {
     >
       Sign Up
     </button>
-    <p className="mt-4 text-center">
+    <p className="mt-4 text-center md:text-lg text-sm">
       Already have an account?{" "}
       <Link href="/student/signin" className="text-blue-600 hover:underline">
         Sign In!
