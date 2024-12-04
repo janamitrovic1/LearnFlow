@@ -23,7 +23,7 @@ const Quizzes = () => {
     useEffect(() => {
         async function run() {
             try {
-                const res = await fetch("/api/student/quiz");
+                const res = await fetch("http://localhost:3000/api/student/quiz");
                 if(res.ok){
                     const { data } = await res.json();
                     const quizzes = data.map((item: any) => item.quiz);
@@ -32,6 +32,7 @@ const Quizzes = () => {
                 else
                     setError("Unknown error!");
             } catch (error) {
+                console.log(error);
                 setError(error);
             }
         }
@@ -40,15 +41,19 @@ const Quizzes = () => {
     return (
         <div>
             {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
-            { quizzes.map((quiz: any) => (
-                    <Link href={"quiz/" + quiz.id} key={quiz.id}>
-                        <div>
+            {quizzes.length > 0 ? (
+                quizzes.map((quiz: any) => (
+                    <Link href={"quiz/" + quiz?.id}>
+                        <div key={quiz.id}>
                             <h2>{quiz.name}</h2>
-                            <p>{quiz.teacher.firstName} {quiz.teacher.lastName}</p>
+                            <p>{quiz.teacher.firstName + ' ' + quiz.teacher.lastName}</p>
                             <p>Questions: {quiz._count.questions}</p>
                         </div>
                     </Link>
-                ))}
+                ))
+            ) : (
+                <p>No quizzes available.</p>
+            )}
         </div>
     )
 }

@@ -39,20 +39,12 @@ export async function GET(){
 export async function POST(req: Request) {
     try {
         const session: any = await getServerSession(authOptions);
-        const { name, students } = await req.json();
+        const { name } = await req.json();
         const clasS = await prisma.class.create({
             data: {
                 teacherId: session?.user?.id,
                 name
             }
-        });
-        students.map(async (student: string) => {
-            await prisma.studentClass.create({
-                data: {
-                    classId: clasS.id,
-                    studentId: student
-                }
-            })
         });
         return Response.json({ message: "Successfully made class!"}, { status: 201 });
     } catch (error) {
