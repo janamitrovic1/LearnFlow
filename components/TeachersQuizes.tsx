@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Link from 'next/link';
 
 export interface TeachersQuizesType {
   id: string; // Jedinstveni identifikator klase
@@ -12,7 +12,7 @@ export interface TeachersQuizesType {
 }
 
 const TeachersQuizes = ({props}:TeachersQuizesType) => {
-	const {name,_count,isPrivate}=props;
+	const {id,name,_count,isPrivate}=props;
 	const {questions} = _count;
 	let privacyStatus;
     if (isPrivate)
@@ -23,7 +23,7 @@ const TeachersQuizes = ({props}:TeachersQuizesType) => {
 	return (
 		<div className="bg-white p-4 flex flex-col justify-between rounded shadow mb-2">
         <div className='flex md:flex-row justify-between flex-col'>
-            <h3 className="text-lg truncate font-semibold">{name}</h3>
+            <h3 className="text-lg truncate font-semibold"><Link href={`/teacher/quiz/${id}`}>{name}</Link></h3>
             <p className="text-text truncate">Status: {privacyStatus}</p>
         </div>
         <div>

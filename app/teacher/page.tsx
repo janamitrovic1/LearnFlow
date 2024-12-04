@@ -50,7 +50,7 @@ const Page = async () => {
 			{/* Test Section */}
 			<section className="mt-6">
 				<div className="flex flex-row gap-5 items-center">
-					<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">Your Quizzes</h1>
+					<h1 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text"><Link href="/teacher/quiz/">Your Quizzes</Link></h1>
 					<Link href="teacher/quiz/create" className=" ">
 						<PlusCircle stroke="green"></PlusCircle>
 					</Link>

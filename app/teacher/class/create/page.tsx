@@ -50,7 +50,7 @@ export default function AddClassForm() {
 
   return (
     <div className="md:max-w-md max-w-72 mx-auto mt-8 p-6 border rounded-md shadow-lg">
-      <h2 className="md:text-2xl text-xl font-semibold text-center mb-4">
+      <h2 className="md:text-2xl mt-6 text-xl font-semibold text-center mb-4">
         Create a class
       </h2>
       {error && (

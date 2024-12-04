@@ -12,7 +12,7 @@ export default async function ClassPage() {
     console.log(classes);
 
     return (
-        <div className="flex flex-wrap gap-4 mt-4">
+        <div className="flex flex-wrap gap-4 p-6 mt-4">
             {classes.length>0?classes.map((classItem, index) => (
                 <FullTeachersClasses 
                     key={index} 

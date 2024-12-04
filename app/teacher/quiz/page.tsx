@@ -1,17 +1,25 @@
 import Link from "next/link";
 import { env } from "process"
+import { TeachersQuizesType } from "@/components/TeachersQuizes";
+import TeachersQuizes from "@/components/TeachersQuizes";
 
 export default async function AllQuizzes() {
-  const res = await fetch(process.env.APP_API_URL + "/api/teacher/quiz", {
-    credentials: 'include'
-  });
-  const { data } = await res.json();
-  console.log(data);
-  return (
-    <div>
-      {data.map((quiz: any, index: number) => (
-        <Link href={"quiz/" + quiz?.id}><p>{quiz?.name} - {quiz?._count?.questions}</p></Link>
-      ))}
-    </div>
-  )
+
+    const res = await fetch(process.env.APP_API_URL + "/api/teacher/quiz", {
+    	credentials: 'include'
+    });
+	const { data:quizes } : { data: TeachersQuizesType[] } = await res.json();
+
+  	console.log(quizes);
+
+  	return (
+		<div className="mt-4 p-6">
+			{quizes.length>0?quizes.map((quizItem, index) => (
+				<TeachersQuizes
+					key={index}
+					props={quizItem}
+				/>
+			)):<p className=''>No Tests Found.</p>}
+		</div>
+  	)
 }
