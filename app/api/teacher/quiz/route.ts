@@ -8,7 +8,7 @@ export async function GET() {
         const session : any = await getServerSession(authOptions);
         const quizzes = await prisma.quiz.findMany({
             where: {
-                teacherId: session.user.id
+                teacherId: session?.user?.id
             }, 
             select: {
                 id: true, 
@@ -66,7 +66,6 @@ export async function POST(req: Request) {
                             })
                     })
                 })
-                    
             })
         );
         students.map(async(student: any) => {

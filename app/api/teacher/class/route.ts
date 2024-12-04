@@ -14,6 +14,18 @@ export async function GET(){
                     select: {
                         studentClass: true
                     }
+                },
+                studentClass: {
+                    select: {
+                        student: {
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                email: true
+                            }
+                        }
+                    }
                 }
             }
         });

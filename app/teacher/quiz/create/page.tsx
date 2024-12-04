@@ -1,9 +1,9 @@
 "use client";
 
-import { QuestionType } from "@prisma/client";
-import { useState } from "react";
+import { Class, QuestionType } from "@prisma/client";
+import { useEffect, useState } from "react";
 
-interface Question {
+export interface Question {
   text?: string;
   questionType: QuestionType;
   answers?: string[];
@@ -16,6 +16,30 @@ export default function CreateQuiz() {
   const [isPrivate, setIsPrivate] = useState(false);
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [classes, setClasses] = useState<Class[] | null>([]);
+  const [checkedStudentIds, setCheckedStudentIds] = useState<string[]>([])
+
+  const handleStudentCheckboxChange = (studentId: string, isChecked: boolean) => {
+    setCheckedStudentIds((prev) =>
+        isChecked
+            ? [...prev, studentId] // Add ID if checked
+            : prev.filter((id) => id !== studentId) // Remove ID if unchecked
+    );
+  };
+
+  const handleClassCheckboxChange = (classStudents: any[], isChecked: boolean) => {
+    const studentIds = classStudents.map((sc: any) => sc.student.id);
+    setCheckedStudentIds((prev) =>
+        isChecked
+            ? [...prev, ...studentIds.filter((id) => !prev.includes(id))] // Add only unchecked IDs
+            : prev.filter((id) => !studentIds.includes(id)) // Remove class IDs
+    );
+  };
+
+  const isClassFullyChecked = (classStudents: any[]) => {
+      const studentIds = classStudents.map((sc: any) => sc.student.id);
+      return studentIds.every((id) => checkedStudentIds.includes(id));
+  };
 
   const handleButtonClick = (buttonType: QuestionType) => {
     if (buttonType === "INPUT")
@@ -144,7 +168,7 @@ export default function CreateQuiz() {
       const data = await fetch("http://localhost:3000/api/teacher/quiz", {
         method: "POST",
         body: JSON.stringify({
-          name, isPrivate, questions
+          name, isPrivate, questions, students: checkedStudentIds
         }),
         credentials: 'include'
       });
@@ -154,6 +178,18 @@ export default function CreateQuiz() {
       console.log(process.env.APP_API_URL)
     }
   };
+
+  useEffect(() => {
+    const run = async() => {
+      const res = await fetch("/api/teacher/class", {
+        credentials: 'include'
+      })
+      const { data } = await res.json();
+      console.log(data);
+      setClasses(data);
+    }
+    run();
+  }, [])
 
   return (
     <div>
@@ -315,6 +351,49 @@ export default function CreateQuiz() {
       <button type="button" onClick={handleSubmit}>
         Submit
       </button>
+      {/* Logika za dodavanje ucenika! */}
+      <div>
+            {classes?.map((clasS: any, classIndex: number) => (
+                <div key={classIndex} className="class-container">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={isClassFullyChecked(clasS.studentClass)}
+                            onChange={(e) =>
+                                handleClassCheckboxChange(clasS.studentClass, e.target.checked)
+                            }
+                        />
+                        <strong>{clasS?.name}</strong><span> - students: {clasS?._count?.studentClass}</span>
+                    </label>
+                    <div className="students-list">
+                        {clasS.studentClass?.map((studentClass: any, studentIndex: number) => (
+                            <div key={studentIndex} className="student-item">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={checkedStudentIds.includes(
+                                            studentClass?.student?.id
+                                        )}
+                                        onChange={(e) =>
+                                            handleStudentCheckboxChange(
+                                                studentClass?.student?.id,
+                                                e.target.checked
+                                            )
+                                        }
+                                    />
+                                    {studentClass?.student?.firstName}{" "}
+                                    {studentClass?.student?.lastName}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
+            <div className="checked-students">
+                <h4>Checked Student IDs:</h4>
+                <pre>{JSON.stringify(checkedStudentIds, null, 2)}</pre>
+            </div>
+        </div>
     </div>
   );
 }
