@@ -12,6 +12,17 @@ export async function GET() {
                         studentId: session?.user?.id
                     }
                 }
+            },
+            select: {
+                id: true,
+                name: true,
+                teacher: {
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true
+                    }
+                }
             }
         });
         return Response.json({ data: classes }, { status: 200 });

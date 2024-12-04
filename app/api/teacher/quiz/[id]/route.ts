@@ -43,9 +43,6 @@ export async function PUT(req: Request, { params }: { params: any }) {
         const session: any = await getServerSession(authOptions)
         const { id } = await params;
         const {name, isPrivate, questions} = await req.json();
-
-        console.log(name, isPrivate, questions)
-
         const updatedQuiz = await prisma.quiz.update({
             where: {
               id: id, // Provide the quiz ID to update

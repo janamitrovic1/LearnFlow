@@ -2,49 +2,45 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/prisma/db";
 import { getServerSession } from "next-auth";
 
-export async function GET(req: Request, { params } : { params : { id: string}}) {
-    try {
-        const session: any = await getServerSession(authOptions)
-        const { id } = await params;
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+  try {
+    const session: any = await getServerSession(authOptions);
+    const { id } = await params;
 
-        const classes = await prisma.studentClass.findUnique({
-            where: {
-                classId_studentId: {
-                    studentId: session?.user?.id,
-                    classId: id
+    const classData = await prisma.class.findUnique({
+      where: { id },
+      include: {
+        teacher:{
+            select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                email: true,
+                image: true
+            }
+        }, 
+        studentClass: {
+          include: {
+            student: {
+                select: {
+                    id: true,
+                    firstName: true,
+                    lastName: true,
+                    email: true,
+                    image: true
                 }
             },
-            include: {
-                student: {
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                        email: true,
-                        image: true
-                    }
-                },
-                class: {
-                    select: {
-                        teacher: {
-                            select: {
-                                id: true,
-                                firstName: true,
-                                lastName: true,
-                                email: true,
-                                image: true
-                            }
-                        }
-                    }
-                }
-            }
-        })
+          },
+        },
+      },
+    });
 
-        return Response.json({ data: classes }, { status: 200 });
-    } catch (error) {
-        return Response.json({ err: error }, { status: 500 });
-    }
+    return Response.json({ data: classData }, { status: 200 });
+  } catch (error) {
+    return Response.json({ err: error }, { status: 500 });
+  }
 }
+
 
 export async function DELETE(req: Request, { params } : { params : { id: string}}) {
     try {
