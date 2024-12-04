@@ -225,6 +225,7 @@ export default function CreateQuiz() {
           name,
           isPrivate,
           questions,
+          students: checkedStudentIds
         }),
         headers: {
           "Content-Type": "application/json",
@@ -408,7 +409,6 @@ export default function CreateQuiz() {
             </div>
           )}
         </div>
-
         <button
           type="button"
           className="mt-6 px-6 py-2 bg-[#252641] text-white rounded-lg hover:bg-[#767BC4]"
