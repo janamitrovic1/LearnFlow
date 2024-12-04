@@ -46,8 +46,9 @@ export async function POST(req: Request) {
                 name
             }
         });
-        return Response.json({ message: "Successfully made class!"}, { status: 201 });
+        return Response.json({ data: clasS }, { status: 201 });
     } catch (error) {
+        console.log(error);
         return Response.json({ err: error }, { status: 500 })
     }
 }

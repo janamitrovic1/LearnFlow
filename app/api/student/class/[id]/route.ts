@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/prisma/db";
+import { get } from "http";
 import { getServerSession } from "next-auth";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
@@ -41,6 +42,31 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
+export async function POST(req: Request, { params } : { params : { id: string}}) {
+  try {
+    const { id } = await params;
+    const session: any = await getServerSession(authOptions);
+    
+    const exists = await prisma.class.findUnique({
+      where: {
+        id
+      }
+    });
+
+    if(!exists)
+      return Response.json({ message: "Class does not exists!"}, { status: 404 });
+    
+    await prisma.studentClass.create({
+      data:{
+        classId: id,
+        studentId: session?.user?.id
+      }
+    });
+    return Response.json({ message: "Successfully added to class!" }, { status: 200 });
+  } catch (error) {
+    return Response.json({ err: error }, { status: 500 });
+  }
+}
 
 export async function DELETE(req: Request, { params } : { params : { id: string}}) {
     try {
