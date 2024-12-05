@@ -23,7 +23,7 @@
 		@apply flex flex-col sm:flex-row justify-between items-center gap-5 md:gap-10;
 	}
 	.btn-white{
-		@apply bg-white-100 hover:scale-110 transform transition-transform duration-500 px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-text cursor-pointer
+		@apply bg-opacity-0 border-2 hover:scale-110 transform transition-transform duration-500 px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-text cursor-pointer
 	}
 
 	.dropdown{
