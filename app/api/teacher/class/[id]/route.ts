@@ -40,30 +40,17 @@ export async function PUT(req: Request, { params } : { params : { id: string}}) 
     try {
       const session: any = await getServerSession(authOptions);
       const { id } = await params;
-      const { name, students } = await req.json();
+      const { name } = await req.json();
 
       const updatedClass = await prisma.class.update({
         where: { id },
         data: { name } 
       })
 
-      await prisma.studentClass.deleteMany({
-        where: { classId: id }
-      })
-
-      students.map(async (student: string) => {
-        
-        await prisma.studentClass.create({
-            data: {
-                classId: updatedClass.id,
-                studentId: student
-            }
-        })
-    });
-
     return Response.json({ message: "Successfully updated class!" }, { status: 200 });
 
     } catch (error) {
+      console.log(error);
       return Response.json({ err: error }, { status: 500 });
     }
 }

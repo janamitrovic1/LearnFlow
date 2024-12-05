@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { env } from "process"
+
 import { TeachersQuizesType } from "@/components/TeachersQuizes";
 import TeachersQuizes from "@/components/TeachersQuizes";
 

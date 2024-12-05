@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { TeachersClassesType } from "@/components/TeachersClasses";
 import { Button } from "@headlessui/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 export default function ClassPageID() {
     const params = useParams();
     const [clasS, setClass] = useState<TeachersClassesType | null>(null); // Precizno tipizovanje
@@ -73,6 +74,7 @@ export default function ClassPageID() {
                 <p className="text-gray-500">No students enrolled in this class yet.</p>
             )}
             <Button className="text-white mx-auto max-w-fit rounded-3xl px-6 py-2 mt-4 bg-red-500"  onClick={handleDelete}>Delete Class</Button>
+            <Link href={clasS?.id + "/edit"}>Edit</Link>
         </div>
     );
 }
