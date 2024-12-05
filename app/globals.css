@@ -13,22 +13,17 @@
 	}
 @layer utilities{
 	.navbar {
-		@apply bg-primary flex sm:flex-row flex-col justify-between items-center gap-5  py-7 md:px-20 px-10 text-text font-normal max-w-full;
+		@apply bg-white flex md:flex-row flex-col justify-between text-sm items-center text-wrap gap-5 px-10 pb-5 md:py-10 md:px-20 text-text md:sticky md:top-0 w-full font-normal shadow-lg z-50 h-auto md:h-20;
 	}
 	  
-	.logo {
-		font-size: 1.5rem;
-		font-weight: bold;
-		color: #008cba;
-	  }
 	.btn-purple{
-		@apply bg-third px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-white cursor-pointer	;
+		@apply bg-third px-40 hover:scale-110 transform transition-transform duration-500 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-white cursor-pointer	;
 	}
 	.nav-link{
-		@apply flex flex-col sm:flex-row justify-between items-center gap-10;
+		@apply flex flex-col sm:flex-row justify-between items-center gap-5 md:gap-10;
 	}
 	.btn-white{
-		@apply bg-white px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-text cursor-pointer
+		@apply bg-white-100 hover:scale-110 transform transition-transform duration-500 px-40 py-3 lg:w-[160px] md:w-[130px] w-[110px] rounded-[40px] text-text cursor-pointer
 	}
 
 	.dropdown{
