@@ -12,6 +12,13 @@ export async function GET(req: Request) {
               },
             },
             include: {
+              teacher: {
+                select: {
+                  firstName: true,
+                  lastName: true,
+                  email: true
+                }
+              },
               _count: {
                 select: {
                   questions: true, // Count the number of questions
