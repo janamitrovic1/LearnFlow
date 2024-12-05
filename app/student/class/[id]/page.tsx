@@ -1,17 +1,32 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useParams, useRouter  } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const Class = () => {
     const { id } = useParams();
+    const router = useRouter();
     const [clasS, setClasS] = useState<any | null>(null);
     const [error, setError] = useState<string | null>(null);
+
+    const handleExit = () => {
+        const run = async() => {
+            const res = await fetch("/api/student/class/" + clasS?.id, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
+            if(res.ok)
+                router.push("/student")
+        }
+        run();
+    }
 
     useEffect(() => {
         const run = async () => {
             try {
-                const res = await fetch("/api/student/class/" + id);
+                const res = await fetch("/api/student/class/" + id, {
+                    credentials: 'include'
+                });
                 if (res.ok) {
                     const { data } = await res.json();
                     setClasS(data);
@@ -36,6 +51,7 @@ const Class = () => {
 
             {clasS && (
                 <div>
+                    <button onClick={handleExit}>Exit Class!</button>
                     {/* Header section */}
                     <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
                         <h1 className="text-3xl font-bold text-gray-800 mb-4">{clasS.name}</h1>
