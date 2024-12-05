@@ -1,6 +1,7 @@
 "use client";
 
 import { Class, QuestionType } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export interface Question {
@@ -18,7 +19,8 @@ export default function CreateQuiz() {
   const [error, setError] = useState<string | null>(null);
   const [classes, setClasses] = useState<Class[] | null>([]);
   const [checkedStudentIds, setCheckedStudentIds] = useState<string[]>([]);
-
+  
+  const router = useRouter();
   const handleStudentCheckboxChange = (
     studentId: string,
     isChecked: boolean
@@ -239,7 +241,7 @@ export default function CreateQuiz() {
         throw new Error(result.message || "Failed to submit quiz.");
       }
 
-      alert("Quiz submitted successfully!");
+      router.push("/teacher")
     } catch (err) {
       console.error(err);
       setError("Failed to submit quiz.");
@@ -462,6 +464,7 @@ export default function CreateQuiz() {
               >
                   Submit
               </button>
+              
           </div>
       </div>
   )};

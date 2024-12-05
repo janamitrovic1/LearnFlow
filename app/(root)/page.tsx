@@ -18,7 +18,7 @@ export default function Home() {
 					<Link href="/student/signup" className="px-6 hover:scale-110 transform transition-transform duration-500 py-3 bg-[#4d4df7] text-white rounded-lg shadow-md hover:bg-[#3b3bd1]">
 						Sign up as a student
 					</Link>
-					<Link href="/teacher/signup" className="px-6 py-3 hover:scale-110 transform transition-transform duration-500 border border-[#4d4df7] text-[#4d4df7] rounded-lg shadow-md hover:bg-[#f3f4fa]">
+					<Link href="/teacher/signup" className="px-6 py-3 hover:scale-110 transform transition-transform duration-500 border border-[#4d4df7] text-[#4d4df7] rounded-lg shadow-md">
 						Sign up as a teacher
 					</Link>
 				</div>

@@ -17,7 +17,7 @@ export default function QuizPage() {
     }, []);
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-white p-6">
+        <div className="flex justify-center min-h-screen bg-white p-6">
             <div className="w-full max-w-3xl bg-gray-100 rounded-lg shadow-md p-8">
                 {/* Card za osnovne informacije o kvizu */}
                 <div className="bg-gray-200 p-6 rounded-lg shadow-md mb-6">
@@ -81,6 +81,10 @@ export default function QuizPage() {
                         <p className="text-gray-500">No students assigned to this quiz.</p>
                     )}
                 </div>
+
+                <button className="bg-red-500 mt-4 rounded-3xl px-4 py-2 transition hover:scale-105 duration-500 text-white">
+                    Delete Quiz
+                </button>
             </div>
         </div>
     );

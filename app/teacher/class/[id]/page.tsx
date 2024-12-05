@@ -6,6 +6,7 @@ import { TeachersClassesType } from "@/components/TeachersClasses";
 import { Button } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { CircleX } from "lucide-react";
 export default function ClassPageID() {
   const params = useParams();
   const [clasS, setClass] = useState<TeachersClassesType | null>(null); // Precizno tipizovanje
@@ -65,12 +66,12 @@ export default function ClassPageID() {
       {clasS.studentClass.length > 0 ? (
         <ul className="divide-y divide-gray-200">
           {clasS.studentClass.map((studentClass, index) => (
-            <li key={index} className="py-3 flex items-center">
+            <li key={index} className="py-3 bg-slate-50 rounded-xl mb-2 flex items-center">
               <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
                 {studentClass.student.firstName.charAt(0)}
                 {studentClass.student.lastName.charAt(0)}
               </div>
-              <div className="ml-4">
+              <div className="ml-4 truncate">
                 <p className="text-sm text-wrap font-medium text-gray-900">
                   {studentClass.student.firstName}{" "}
                   {studentClass.student.lastName}
@@ -79,11 +80,11 @@ export default function ClassPageID() {
                   {studentClass.student.email}
                 </p>
               </div>
-              <div className="min-w-max ml-auto">
+              <div className="ml-auto">
                 <button
                   onClick={() => handleThrowOut(studentClass?.student?.id)}
                 >
-                  Throw Out
+                  <CircleX></CircleX>
                 </button>
               </div>
             </li>
@@ -94,14 +95,14 @@ export default function ClassPageID() {
       )}
       <div className="flex justify-center gap-4 mt-4">
         <Button
-          className="text-white rounded-3xl px-6 py-2 bg-red-500 hover:bg-red-600 transition-colors"
+          className="text-white md:text-auto text-sm rounded-3xl px-6 py-2 bg-red-500 hover:bg-red-600 transition-colors"
           onClick={handleDelete}
         >
           Delete Class
         </Button>
         <Link
           href={clasS?.id + "/edit"}
-          className="text-white rounded-3xl px-6 py-2 bg-blue-500 hover:bg-blue-600 transition-colors text-center"
+          className="text-white md:text-auto text-sm rounded-3xl px-6 py-2 bg-blue-500 hover:bg-blue-600 transition-colors text-center"
         >
           Edit Class
         </Link>
