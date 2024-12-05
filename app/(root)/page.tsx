@@ -9,7 +9,7 @@ export default function Home() {
       	<div className="">
 			<div className="flex flex-col items-center py-16 px-8 bg-primary-500">
 				<h1 className="text-2xl md:text-5xl font-bold text-gray-800 mb-6 text-center">
-					How do you want to study?
+					LearnFlow
 				</h1>
 				<p className="text-base md:text-lg text-gray-600 mb-8 text-center max-w-2xl">
 					Master whatever you&apos;re learning with LearnFlow&apos;s interactive flashcards, practice tests, and study activities.
@@ -28,16 +28,16 @@ export default function Home() {
       {/* Kartice sa opcijama */}
       	<section className="py-16 px-8 bg-[#f7f9fc]">
 			{/* <IntroductionComponent></IntroductionComponent> */}
-			<h2 className="text-xl md:text-4xl text-center font-semibold mb-8">What is it?</h2>
+			<h2 className="text-xl md:text-4xl text-center font-semibold mb-8" id="us">What is it?</h2>
 			<div className="flex md:flex-row flex-col gap-8 max-w-6xl mx-auto">
 				<div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition flex-1 duration-500">
-					<h3 className="md:text-xl text-lg font-medium text-gray-800 mb-4">Learn</h3>
+					<h3 className="md:text-xl text-lg font-medium text-gray-800 mb-4">Take quizzes</h3>
 					<p className="text-base md:text-lg text-gray-600">
-						Create your own flashcards or choose from millions created by other students.
+						Take quizzes or choose from millions created by other teachers.
 					</p>
 				</div>
 				<div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition flex-1 duration-500">
-					<h3 className="md:text-xl text-lg font-medium text-gray-800 mb-4">Study Guides</h3>
+					<h3 className="md:text-xl text-lg font-medium text-gray-800 mb-4">Learn</h3>
 					<p className="text-base md:text-lg text-gray-600">
 						Organize your study resources in one place for better retention.
 					</p>

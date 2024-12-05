@@ -14,7 +14,7 @@ const FeaturesComponent = () => {
 					<h3 className="md:text-xl text-lg font-medium text-[#4d4df7] mb-4  ">Learn</h3>
 					<p className="text-gray-600 text-base md:text-lg mb-6">Use LearnFlow's study tools to learn efficiently.</p>
 					<button className="bg-[#4d4df7] hover:scale-110 transform transition-transform duration-500 text-white px-4 py-2 rounded-lg font-normal">
-						Get started
+						You can learn
 					</button>
 				</div>
 				{/* Card 2 */}
@@ -22,7 +22,7 @@ const FeaturesComponent = () => {
 					<h3 className="md:text-xl text-lg font-medium text-[#4d4df7] mb-4">Study Guides</h3>
 					<p className="text-base md:text-lg text-gray-600 mb-6">Access study guides to stay on top of topics.</p>
 					<button className="bg-[#4d4df7] hover:scale-110 transform transition-transform duration-500 text-white px-4 py-2 rounded-lg font-normal">
-						Explore now
+						You can take quizzes
 					</button>
 				</div>
 				{/* Card 3 */}
@@ -30,7 +30,7 @@ const FeaturesComponent = () => {
 					<h3 className="md:text-xl text-lg font-medium text-[#4d4df7] mb-4">Flashcards</h3>
 					<p className="text-base md:text-lg text-gray-600 mb-6">Create and review flashcards for any subject.</p>
 					<button className="bg-[#4d4df7] hover:scale-110 transform transition-transform duration-500 text-white px-4 py-2 rounded-lg font-normal">
-						Try flashcards
+						You can make flashcards
 					</button>
 				</div>
 				{/* Card 4 */}
@@ -38,7 +38,7 @@ const FeaturesComponent = () => {
 					<h3 className="md:text-xl text-lg font-medium text-[#4d4df7] mb-4">Practice Tests</h3>
 					<p className="text-base md:text-lg text-gray-600 mb-6">Take personalized practice tests to prepare.</p>
 					<button className="bg-[#4d4df7] hover:scale-110 transform transition-transform duration-500 text-white px-4 py-2 rounded-lg font-normal">
-						Start practicing
+						You can practice
 					</button>
 				</div>
 			</div>
