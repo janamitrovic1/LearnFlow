@@ -1,11 +1,24 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function QuizPage() {
     const params = useParams();
+    const router = useRouter();
     const [quiz, setQuiz] = useState<any>(null);
+
+    const handleDelete = () => {
+        const run = async() => {
+            const res = await fetch("/api/teacher/quiz/" + params?.id, {
+                method: 'DELETE',
+                credentials: 'include'
+            })
+            if(res.ok)
+                router.push("/teacher")
+        }
+        run();
+    }
 
     useEffect(() => {
         const run = async () => {
@@ -82,7 +95,7 @@ export default function QuizPage() {
                     )}
                 </div>
 
-                <button className="bg-red-500 mt-4 rounded-3xl px-4 py-2 transition hover:scale-105 duration-500 text-white">
+                <button className="bg-red-500 mt-4 rounded-3xl px-4 py-2 transition hover:scale-105 duration-500 text-white" onClick={handleDelete}>
                     Delete Quiz
                 </button>
             </div>
