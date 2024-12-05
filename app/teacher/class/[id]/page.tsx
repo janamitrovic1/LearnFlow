@@ -10,15 +10,16 @@ export default function ClassPageID() {
   const params = useParams();
   const [clasS, setClass] = useState<TeachersClassesType | null>(null); // Precizno tipizovanje
   const router = useRouter();
+
+  const fetchData = async () => {
+    const res = await fetch("/api/teacher/class/" + params?.id, {
+      credentials: "include",
+    });
+    const { data: classData }: { data: TeachersClassesType } = await res.json();
+    setClass(classData);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/teacher/class/" + params?.id, {
-        credentials: "include",
-      });
-      const { data: classData }: { data: TeachersClassesType } =
-        await res.json();
-      setClass(classData);
-    };
     fetchData();
   }, [params?.id]);
 
@@ -38,6 +39,13 @@ export default function ClassPageID() {
     if (res.ok) {
       router.push("../");
     }
+  };
+
+  const handleThrowOut = async (id: any) => {
+    const res = await fetch(`/api/teacher/class/${clasS?.id}/${id}`, {
+      method: "DELETE",
+    });
+    if (res.ok) fetchData();
   };
 
   return (
@@ -70,6 +78,13 @@ export default function ClassPageID() {
                 <p className="text-sm text-wrap text-gray-500 ">
                   {studentClass.student.email}
                 </p>
+              </div>
+              <div className="min-w-max ml-auto">
+                <button
+                  onClick={() => handleThrowOut(studentClass?.student?.id)}
+                >
+                  Throw Out
+                </button>
               </div>
             </li>
           ))}
