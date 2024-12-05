@@ -64,7 +64,7 @@ export default function Quiz() {
                 <div key={index} className="flex items-center space-x-3">
                   <input
                     type="hidden"
-                    name={question?.id + "-text"}
+                    name={question?.id + "-" + response?.id}
                     value={response?.text}
                   />
                   <input

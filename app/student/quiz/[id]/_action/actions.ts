@@ -12,7 +12,7 @@ export const CheckQuiz = async(formData: FormData) => {
         data?.questions?.map((question: any) => {
             if(question?.questionType == "RADIO") {
                 const answer = formData.get(question?.id)
-                const questionRep = { type: "RADIO", id: answer, text: question?.text, answer: formData.get(question?.id + "-text"), correct: false }
+                const questionRep = { type: "RADIO", id: answer, text: question?.text, answer: formData.get(question?.id + "-" + answer), correct: false }
                 if(question?.answers[0]?.responseId == answer)
                     questionRep.correct = true;
                 report.push(questionRep);
