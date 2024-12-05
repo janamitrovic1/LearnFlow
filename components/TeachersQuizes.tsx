@@ -16,21 +16,21 @@ const TeachersQuizes = ({ props }: { props: TeachersQuizesType }) => {
   const privacyStatus = isPrivate ? "Private" : "Public";
 
   return (
-    <div className="bg-white p-4 flex flex-col justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4">
-      <div className="flex md:flex-row justify-between flex-col mb-2">
-        <h3 className="text-lg font-semibold text-[#4d4df7] truncate">
-          <Link href={`/teacher/quiz/${id}`}>{name}</Link>
-        </h3>
-        <p className={`text-sm ${isPrivate ? 'text-red-500' : 'text-green-500'} font-medium`}>
-          Status: {privacyStatus}
-        </p>
+    <Link href={`/teacher/quiz/${id}`}>
+      <div className="bg-white p-4 flex flex-col justify-between rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4 cursor-pointer">
+        <div className="flex md:flex-row justify-between flex-col mb-2">
+          <h3 className="text-lg font-semibold text-[#4d4df7] truncate">{name}</h3>
+          <p className={`text-sm ${isPrivate ? 'text-red-500' : 'text-green-500'} font-medium`}>
+            Status: {privacyStatus}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-700 text-sm truncate">
+            Number of Questions: <span className="font-semibold">{questions}</span>
+          </p>
+        </div>
       </div>
-      <div>
-        <p className="text-gray-700 text-sm truncate">
-          Number of Questions: <span className="font-semibold">{questions}</span>
-        </p>
-      </div>
-    </div>
+    </Link>
   );
 };
 
