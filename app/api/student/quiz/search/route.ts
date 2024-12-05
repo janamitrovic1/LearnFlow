@@ -10,6 +10,7 @@ export async function GET(req: Request) {
               name: {
                 contains: search || "",
               },
+              isPrivate: false
             },
             include: {
               teacher: {
