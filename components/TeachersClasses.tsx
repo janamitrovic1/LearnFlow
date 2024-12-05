@@ -27,16 +27,16 @@ const TeachersClasses = ({ props }: { props: TeachersClassesType }) => {
     
       <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4 cursor-pointer">
         <Link href={`teacher/class/${id}`}>
-        <h2 className="text-lg font-semibold text-[#4d4df7] mb-2 truncate">{name}</h2>
+        <h2 className="text-lg font-semibold text-[#4d4df7] mb-2 break-all md:break-auto">{name}</h2>
         <p className="text-gray-600 mb-1">
           {studentClass > 0 ? (
-            <span className="font-medium">Number of Students: {studentCount}</span>
+            <span className="font-medium break-all md:break-auto">Number of Students: {studentCount}</span>
           ) : (
-            <span className="font-medium text-red-500">No students</span>
+            <span className="font-medium break-all md:break-auto text-red-500">No students</span>
           )}
         </p>
         <p className="text-gray-600 text-sm">
-          Code: <span className="font-semibold text-gray-800">{id}</span>
+          Code: <span className="font-semibold break-all md:break-auto text-gray-800">{id}</span>
         </p>
         </Link>
       </div>

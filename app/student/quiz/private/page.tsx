@@ -35,15 +35,15 @@ const PrivateQuizzes = () => {
                     {quizzes.map((quiz, index) => (
                         <Link href={`/student/quiz/${quiz.id}`} key={quiz.id} passHref>
                             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-                                <h2 className="text-xl font-semibold text-gray-800 mb-2">{quiz.name}</h2>
-                                <p className="text-gray-600">
+                                <h2 className="text-xl font-semibold break-all md:truncate text-gray-800 mb-2">{quiz.name}</h2>
+                                <p className="text-gray-600 break-all md:truncate">
                                     <span className="font-semibold">Teacher:</span> {quiz.teacher.firstName} {quiz.teacher.lastName}
                                 </p>
-                                <p className="text-gray-600">
-                                    <span className="font-semibold">Questions:</span> {quiz._count.questions}
+                                <p className="text-gray- break-all md:truncate ">
+                                    <span className="font-semibold ">Questions:</span> {quiz._count.questions}
                                 </p>
-                                <p className="text-gray-600">
-                                    <span className="font-semibold">Privacy:</span> Private
+                                <p className="text-gray- break-all md:truncate">
+                                    <span className="font-semibold ">Privacy:</span> Private
                                 </p>
                             </div>
                         </Link>

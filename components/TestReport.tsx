@@ -1,20 +1,20 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 const TestReport = ({ report, correct }: any) => {
   const [showCorrect, setShowCorrect] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState<any>([])
+  const [correctAnswers, setCorrectAnswers] = useState<any>([]);
 
   useEffect(() => {
     const merged: any = [];
     const map = new Map();
 
     correct.forEach(({ question, response }: any) => {
-    if (!map.has(question.text)) {
-      map.set(question.text, { question: question.text, answers: [] });
-    }
-    map.get(question.text).answers.push(response?.text);
+      if (!map.has(question.text)) {
+        map.set(question.text, { question: question.text, answers: [] });
+      }
+      map.get(question.text).answers.push(response?.text);
     });
 
     // Convert map to array
@@ -22,53 +22,76 @@ const TestReport = ({ report, correct }: any) => {
 
     setCorrectAnswers(merged);
     
-  }, [correct])
+  }, [correct]);
 
   useEffect(() => console.log(correctAnswers), [correctAnswers]);
-  useEffect(() => console.log(showCorrect), [showCorrect])
+  useEffect(() => console.log(showCorrect), [showCorrect]);
 
   return (
-    <div>
-      <h3>Your Answers:</h3>
-      { report?.map((rep: any, index: number) => (
-        <div key={index}>
-          <h4>{rep?.text}</h4>
-          {rep?.type == "INPUT" &&
-            <div>
-              {rep?.answer} - {rep?.correct && 'correct!' || 'incorrect!'}
-            </div> || rep?.type == "RADIO" &&
-            <div>
-              {rep?.answer} - {rep?.correct && 'correct!' || 'incorrect!'}
-            </div> || rep?.type == "CHECK" &&
-            <div>
+    <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-8">
+      <h3 className="text-2xl font-bold text-gray-800 mb-6 break-all md:truncate">Your Answers:</h3>
+
+      {report?.map((rep: any, index: number) => (
+        <div key={index} className="mb-6">
+          <h4 className="text-xl font-semibold break-all md:truncate text-gray-700 mb-2">{rep?.text}</h4>
+
+          {rep?.type === "INPUT" && (
+            <div className="text-lg break-all md:truncate text-gray-600">
+              {rep?.answer} - <span className={rep?.correct ? 'text-green-500' : 'text-red-500'}>{rep?.correct ? 'correct!' : 'incorrect!'}</span>
+            </div>
+          )}
+
+          {rep?.type === "RADIO" && (
+            <div className="text-lg break-all md:truncate text-gray-600">
+              {rep?.answer} - <span className={rep?.correct ? 'text-green-500' : 'text-red-500'}>{rep?.correct ? 'correct!' : 'incorrect!'}</span>
+            </div>
+          )}
+
+          {rep?.type === "CHECK" && (
+            <div className="space-y-2 break-all md:truncate mt-2">
               {rep?.answers?.map((answer: any, index: number) => (
-                <div key={index}>
-                  {answer?.answer} - {answer?.correct && 'correct!' || 'incorrect!'}
+                <div key={index} className="text-lg text-gray-600">
+                  {answer?.answer} - <span className={answer?.correct ? 'text-green-500' : 'text-red-500'}>{answer?.correct ? 'correct!' : 'incorrect!'}</span>
                 </div>
               ))}
             </div>
-          }
+          )}
         </div>
       ))}
-      <h2>Corrects:</h2>
-      {showCorrect  &&
-        (<div>
-          {correctAnswers?.map((cor: any, index: number) => (
-            <div key={index}>
-              <h2>Question: {cor?.question}</h2>
-              <h3>Correct Answers: </h3>
-              {cor?.answers?.map((ans: any, index: number) => (
-                <div key={index}>
-                  <p>{ans}</p>
+
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold break-all md:truncate text-gray-800 mb-4">Correct Answers:</h2>
+
+        {showCorrect && (
+          <div className="space-y-6">
+            {correctAnswers?.map((cor: any, index: number) => (
+              <div key={index} className="border-t pt-4">
+                <h3 className="text-xl font-semibold break-all md:truncate text-gray-700">{cor?.question}</h3>
+                <h4 className="text-lg font-medium break-all md:truncate text-gray-600">Correct Answers:</h4>
+                <div className="space-y-2">
+                  {cor?.answers?.map((ans: any, index: number) => (
+                    <div key={index} className="text-lg text-gray-600">
+                      <p>{ans}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ))}
-        </div>)
-      }
-      <button type="button" onClick={() => setShowCorrect(prev => (!prev))}>Show</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-6 text-center">
+          <button
+            type="button"
+            onClick={() => setShowCorrect(prev => !prev)}
+            className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
+          >
+            {showCorrect ? 'Hide' : 'Show'} Correct Answers
+          </button>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default TestReport
+export default TestReport;

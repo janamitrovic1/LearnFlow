@@ -78,8 +78,8 @@ export default function StudentSignIn() {
 		{/* Leva strana sa slikom i tekstom */}
 		<div className="hidden md:flex md:w-1/2 bg-[#252641] items-center justify-center p-8">
 		  <div className="text-center">
-			<h1 className="text-4xl font-bold mb-4">Capturing Moments, Creating Memories</h1>
-			<p className="text-gray-300">Join us to build amazing experiences.</p>
+			<h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
+			<p className="text-gray-300">Sign in to access your teacher dashboard.</p>
 		  </div>
 		</div>
   

@@ -21,8 +21,8 @@ export default function QuizPage() {
             <div className="w-full max-w-3xl bg-gray-100 rounded-lg shadow-md p-8">
                 {/* Card za osnovne informacije o kvizu */}
                 <div className="bg-gray-200 p-6 rounded-lg shadow-md mb-6">
-                    <h2 className="text-3xl font-semibold text-gray-800 mb-4">{quiz?.name}</h2>
-                    <div className="text-gray-700 space-y-2">
+                    <h2 className="text-3xl font-semibold break-words md:break-all text-gray-800 mb-4">{quiz?.name}</h2>
+                    <div className="text-gray-700 break-words md:break-all space-y-2">
                         <p><span className="font-semibold">Quiz ID:</span> {quiz?.id}</p>
                         <p><span className="font-semibold">Teacher ID:</span> {quiz?.teacherId}</p>
                         <p><span className="font-semibold">Privacy:</span> {quiz?.isPrivate ? "Private" : "Public"}</p>
@@ -35,7 +35,7 @@ export default function QuizPage() {
                     {quiz?.questions?.length > 0 ? (
                         quiz.questions.map((question: any, index: number) => (
                             <div key={index} className="mb-6">
-                                <p className="text-gray-800 mb-2">
+                                <p className="text-gray-800 break-words md:break-all mb-2">
                                     <span className="font-semibold">Question {index + 1}:</span> {question.text}
                                 </p>
                                 <div className="ml-4">
@@ -43,7 +43,7 @@ export default function QuizPage() {
                                     {question.responses?.map((response: any, resIndex: number) => (
                                         <p
                                             key={resIndex}
-                                            className={`text-gray-600 ${
+                                            className={`text-gray-600 break-words md:break-all ${
                                                 response.isCorrect
                                                     ? "text-green-600 font-semibold"
                                                     : ""
@@ -68,7 +68,7 @@ export default function QuizPage() {
                     <h3 className="text-2xl font-semibold text-gray-800 mb-4">Students</h3>
                     {quiz?.students?.length > 0 ? (
                         quiz.students.map((studentEntry: any, index: number) => (
-                            <div key={index} className="mb-4 border-b border-gray-300 pb-4">
+                            <div key={index} className="mb-4 break-words md:break-all border-b border-gray-300 pb-4">
                                 <p className="text-gray-800">
                                     <span className="font-semibold">Name:</span> {studentEntry.student.firstName} {studentEntry.student.lastName}
                                 </p>

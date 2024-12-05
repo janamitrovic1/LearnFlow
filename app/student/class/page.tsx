@@ -33,10 +33,10 @@ const Classes = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {classes.map((clasS) => (
                         <Link href={`class/${clasS.id}`} key={clasS.id} passHref>
-                            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-                                <h2 className="text-xl font-semibold text-gray-800 mb-2">{clasS.name}</h2>
+                            <div className="bg-white  p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                                <h2 className="text-xl font-semibold break-words md:truncate text-gray-800 mb-2">{clasS.name}</h2>
                                 <p className="text-gray-600">
-                                    <span className="font-semibold">Teacher:</span> {clasS.teacher.firstName} {clasS.teacher.lastName}
+                                    <span className="font-semibold break-all  md:truncate">Teacher:</span> {clasS.teacher.firstName} {clasS.teacher.lastName}
                                 </p>
                             </div>
                         </Link>

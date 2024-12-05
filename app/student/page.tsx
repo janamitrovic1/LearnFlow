@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import StudentClasses, { StudentClassesType } from "@/components/StudentClasses";
 import StudentQuizes, { StudentQuizesType } from "@/components/StudentQuizes";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 const Page = () => {
@@ -73,7 +73,9 @@ const Page = () => {
               <p>No Classes Found</p>
             )}
           </div>
-
+          <section className="mt-6 ">
+            <Link href="/student/search" className="flex flex-row gap-3 items-center bg-stone-300 w-fit px-4 py-2 rounded-3xl">Search for Quizzes!<Search /></Link>        
+          </section>
           {/* Test Section */}
           <section className="mt-6">
             <h2 className="md:text-2xl md:text-left text-center text-xl font-semibold text-text">
