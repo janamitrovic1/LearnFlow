@@ -12,10 +12,11 @@ interface ErrorData {
 }
 
 export default function AddClassForm() {
-  const [formData, setFormData] = useState("");
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const validateInput = (value: string) => {
+
+  const validateInput = (value: string): string => {
     if (value.trim() === "") {
       return "Class name cannot be empty.";
     }
@@ -23,28 +24,41 @@ export default function AddClassForm() {
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
+    const value = event.target.value;
     setFormData(value);
 
     const errorMessage = validateInput(value);
     setError(errorMessage);
   };
 
-  const handleSubmit = async(event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (formData == "")
-      setError("Enter class name!");
-    else{
-        const res = await fetch("/api/teacher/class", {
-            method: "POST",
-            body: JSON.stringify({ name: formData })
-        })
-        if(res.ok)
-            router.push("/teacher");
-        else
-            setError("Unknown error occured")
+    // Validate the input before making the request
+    const validationError = validateInput(formData);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/teacher/class", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: formData }),
+      });
+
+      if (res.ok) {
+        router.push("/teacher");
+      } else {
+        const responseBody = await res.json();
+        setError(responseBody.message || "Unknown error occurred");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to create class. Please try again later.");
     }
   };
 
@@ -54,7 +68,7 @@ export default function AddClassForm() {
         Create a class
       </h2>
       {error && (
-        <p className="text-red-500 text-center">{error}</p>
+        <p className="text-red-500 text-center mb-4">{error}</p>
       )}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -79,7 +93,6 @@ export default function AddClassForm() {
         </div>
         <button
           type="submit"
-          onSubmit={handleSubmit}
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
         >
           Create Class
