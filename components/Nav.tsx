@@ -15,8 +15,8 @@ const Nav = () => {
         <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-                     <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
-            </Link>
+            <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
+          </Link>
 
 
           {/* Navigacioni linkovi */}
