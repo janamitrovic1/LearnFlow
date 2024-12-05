@@ -42,7 +42,7 @@ export async function PUT(req: Request, { params }: { params: any }) {
     try {
         const session: any = await getServerSession(authOptions)
         const { id } = await params;
-        const {name, isPrivate, questions} = await req.json();
+        const {name, isPrivate, questions, students} = await req.json();
         const updatedQuiz = await prisma.quiz.update({
             where: {
               id: id, // Provide the quiz ID to update
@@ -115,7 +115,16 @@ export async function PUT(req: Request, { params }: { params: any }) {
               );
             })
           );
-                    
+          
+          if(students)
+            students?.map(async(student: any) => {
+                await prisma.studentQuiz.create({
+                    data: {
+                        studentId: student,
+                        quizId: updatedQuiz?.id
+                    }
+                });
+            });
         
         return Response.json({ message: "Quiz updated successfully!"}, { status: 200 });
         
