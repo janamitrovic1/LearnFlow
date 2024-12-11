@@ -14,11 +14,10 @@ export interface Question {
 export default function CreateQuiz() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [isPrivate, setIsPrivate] = useState(false);
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [teachers, setTeachers] = useState<any[]>([]);
-  const [checkedTeachers, setCheckedTeachers] = useState([])
+  const [checkedTeachers, setCheckedTeachers] = useState<any[]>([])
   
   const router = useRouter();
 
@@ -192,16 +191,17 @@ export default function CreateQuiz() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/api/teacher/quiz", {
+      const response = await fetch("http://localhost:3000/api/student/quiz", {
         method: "POST",
         body: JSON.stringify({
           name,
-          isPrivate,
-          questions
+          questions,
+          teachers: checkedTeachers
         }),
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include'
       });
 
       const result = await response.json();
@@ -211,18 +211,29 @@ export default function CreateQuiz() {
         throw new Error(result.message || "Failed to submit quiz.");
       }
 
-      router.push("/teacher")
+      router.push("/student")
     } catch (err) {
       console.error(err);
       setError("Failed to submit quiz.");
     }
   };
 
+  const handleCheckboxChange = (teacherId: string) => {
+    // If the teacherId is already in checkedTeachers, remove it (uncheck)
+    if (checkedTeachers.includes(teacherId)) {
+      setCheckedTeachers(checkedTeachers.filter(id => id !== teacherId));
+    } else {
+      // Otherwise, add it to the checkedTeachers (check)
+      setCheckedTeachers([...checkedTeachers, teacherId]);
+    }
+  };
+
   useEffect(() => {
     const run = async () => {
-      const res = await fetch("/api/teacher/");
+      const res = await fetch("/api/teacher");
       const { data } = await res.json();
       console.log(data);
+      setTeachers(data);
     };
     run();
   }, []);
@@ -241,19 +252,6 @@ export default function CreateQuiz() {
                       onChange={(e) => setName(e.target.value)}
                   />
               </h1>
-  
-              <div className="flex items-center gap-4 mb-6">
-                  <span className="text-lg font-medium">Private Quiz:</span>
-                  <label className="flex items-center gap-2">
-                      <input
-                          type="checkbox"
-                          className="w-6 h-6 border-gray-300 rounded focus:ring-2 focus:ring-[#767BC4]"
-                          checked={isPrivate}
-                          onChange={() => setIsPrivate((prev) => !prev)}
-                      />
-                      <span className="text-sm text-gray-700">Enable/Disable</span>
-                  </label>
-              </div>
   
               <form className="space-y-4">
                   {questions.map((question: Question, index: number) => (
@@ -384,7 +382,16 @@ export default function CreateQuiz() {
               <div>
                 {teachers.map((teacher: any, index: number) => (
                     <div key={index}>
-                        {teacher?.email} - {teacher?.id}
+                        <div key={index}>
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={checkedTeachers.includes(teacher.id)}
+                              onChange={() => handleCheckboxChange(teacher.id)}
+                            />
+                            {teacher?.email}
+                          </label>
+                        </div>
                     </div>
                 ))}
               </div>

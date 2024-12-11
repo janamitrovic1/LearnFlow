@@ -23,6 +23,7 @@ model Teacher {
   quizzes   Quiz[]  @relation("TeacherQuizzes")
   questions Question[]  @relation("TeacherQuestions")
   classes   Class[] @relation("TeacherClasses")
+  TeacherQuizzes TeacherQuizzes[] @relation("TeacherQuiz")
 }
 
 model Student {
@@ -34,6 +35,7 @@ model Student {
   image     String @default("/empty_profile.png")
   quizzes   StudentQuiz[] @relation("StudentQuizzes")
   studentClass StudentClass[] @relation("StudentClass")
+  squizzes SQuiz[] @relation("StudentQuizzes")
 }
 
 model Quiz {
@@ -68,7 +70,7 @@ model Question {
   teacher     Teacher    @relation("TeacherQuestions", fields: [teacherId], references: [id])
   responses   Response[] @relation("QuestionResponses")
   answers     Answer[]   @relation("QuestionAnswers")
-  quiz        Quiz       @relation("QuizQuestions", fields: [quizId], references: [id])     
+  quiz        Quiz       @relation("QuizQuestions", fields: [quizId], references: [id])
 }
 
 model Response {
@@ -101,4 +103,44 @@ model StudentClass{
   class Class @relation("ClassStudent", fields: [classId], references: [id])
   student Student @relation("StudentClass", fields: [studentId], references: [id])
   @@id([classId, studentId])
+}
+
+model TeacherQuizzes{
+  teacherId String
+  quizzId String
+  teacher Teacher @relation("TeacherQuiz", fields: [teacherId], references: [id])
+  quiz SQuiz @relation("QuizTeacher", fields: [quizzId], references: [id])
+  @@id([teacherId, quizzId])
+}
+
+model SQuiz {
+  id String @id @default(uuid())
+  studentId String
+  name String
+  student   Student     @relation("StudentQuizzes", fields: [studentId], references: [id])
+  teachersQuizzes TeacherQuizzes[] @relation("QuizTeacher")
+  squestions SQuestion[] @relation("QuizQuestion")
+}
+
+model SQuestion {
+  id          String     @id @default(uuid())
+  quizId      String
+  text        String
+  questionType QuestionType
+  Sresponses   SResponse[] @relation("QuestionResponses")
+  squiz       SQuiz       @relation("QuizQuestion", fields: [quizId], references: [id])
+}
+
+model SResponse {
+  id          String     @id @default(uuid())
+  questionId  String
+  text        String
+  squestion    SQuestion   @relation("QuestionResponses", fields: [questionId], references: [id])
+  sanswers     SAnswer[]   @relation("ResponseAnswers")
+}
+
+model SAnswer {
+  id String @id @default(uuid())
+  responseId  String     
+  sresponse    SResponse   @relation("ResponseAnswers", fields: [responseId], references: [id])
 }

@@ -4,10 +4,10 @@ export async function GET() {
     try {
         const teachers = await prisma.teacher.findMany({
             select: {
-                id,
-                firstName,
-                lastName,
-                email
+                id: true,
+                firstName: true,
+                lastName: true,
+                email: true
             }
         })
 
